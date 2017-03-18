@@ -1,0 +1,36 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                                       http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="18032017-2" author="Evgeny Shilov">
+        <insert tableName="role">
+            <column name="name" type="VARCHAR(45)">SYSTEM_ADMIN</column>
+        </insert>
+        <rollback>
+            <delete tableName="role">
+                <where>id = 1</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="18032017-3" author="Evgeny Shilov">
+        <insert tableName="user">
+            <column name="first_name" type="VARCHAR(45)" value="Admin" />
+            <column name="last_name" type="VARCHAR(45)" value="Admin" />
+            <column name="email" type="VARCHAR(45)" value="ilibed.socialnetwork@gmail.com" />
+            <column name="password" type="VARCHAR(45)" value="1234567" />
+            <column name="role_id" type="INT(11)" valueNumeric="1" />
+            <column name="banned" type="BIT(1)" valueBoolean="false" />
+        </insert>
+        <rollback>
+            <delete tableName="user">
+                <where>email = ilibed.socialnetwork@gmail.com</where>
+            </delete>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

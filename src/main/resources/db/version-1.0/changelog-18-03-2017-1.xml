@@ -1,0 +1,362 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                                       http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="1489855088997-1" author="Evgeny Shilov">
+        <createTable tableName="ban_history">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="admin_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ban_date" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unban_date" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ban_reason_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="commentary" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-2">
+        <createTable tableName="ban_reason">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="reason" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-3">
+        <createTable tableName="city">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-4">
+        <createTable tableName="country">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-5">
+        <createTable tableName="friend_request">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="friend_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="ENUM('pending', 'dissmissed', 'accepted')">
+                <constraints nullable="false"/>
+            </column>
+            <column name="send_date" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-6">
+        <createTable tableName="message">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="sender_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="receiver_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subject" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="send_date" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-7">
+        <createTable tableName="photo">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="owner_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="path" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-8">
+        <createTable tableName="post">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="title" type="VARCHAR(45)"/>
+            <column name="text" type="TEXT"/>
+            <column name="creation_date" type="datetime(6)"/>
+            <column name="photo_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-9">
+        <createTable tableName="post_commentary">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="text" type="TEXT"/>
+            <column name="creation_date" type="datetime(6)"/>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="post_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-10">
+        <createTable tableName="role">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-11">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="main_photo_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="banned" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country_id" type="INT"/>
+            <column name="city_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-12">
+        <createTable tableName="user_friend">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="friend_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-13">
+        <createTable tableName="user_post">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="post_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-21">
+        <createIndex indexName="fk_ban_history_ban_reason1_idx" tableName="ban_history">
+            <column name="ban_reason_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-22">
+        <createIndex indexName="fk_ban_history_user1_idx" tableName="ban_history">
+            <column name="admin_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-23">
+        <createIndex indexName="fk_ban_history_user2_idx" tableName="ban_history">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-24">
+        <createIndex indexName="fk_post_photo1_idx" tableName="post">
+            <column name="photo_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-25">
+        <createIndex indexName="fk_user_city1_idx" tableName="user">
+            <column name="city_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-26">
+        <createIndex indexName="fk_user_country1_idx" tableName="user">
+            <column name="country_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-27">
+        <createIndex indexName="fk_user_post_commentary_post1_idx" tableName="post_commentary">
+            <column name="post_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-28">
+        <createIndex indexName="fk_user_post_commentary_user1_idx" tableName="post_commentary">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-29">
+        <createIndex indexName="fk_user_post_post1_idx" tableName="user_post">
+            <column name="post_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-30">
+        <createIndex indexName="fk_user_post_user1_idx" tableName="user_post">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-31">
+        <createIndex indexName="fk_user_role1_idx" tableName="user">
+            <column name="role_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-32">
+        <createIndex indexName="friend_id_fk_idx" tableName="friend_request">
+            <column name="friend_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-33">
+        <createIndex indexName="message_receiver_fk_idx" tableName="message">
+            <column name="receiver_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-34">
+        <createIndex indexName="message_sender_fk_idx" tableName="message">
+            <column name="sender_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-35">
+        <createIndex indexName="photo_owner_fk_idx" tableName="photo">
+            <column name="owner_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-36">
+        <createIndex indexName="user_friend_friend_fk_idx" tableName="user_friend">
+            <column name="friend_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-37">
+        <createIndex indexName="user_friend_user_fk_idx" tableName="user_friend">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-38">
+        <createIndex indexName="user_if_fk_idx" tableName="friend_request">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-39">
+        <createIndex indexName="user_main_photo_fk_idx" tableName="user">
+            <column name="main_photo_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-40">
+        <addForeignKeyConstraint baseColumnNames="admin_id" baseTableName="ban_history" constraintName="fk_ban_history_admin" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-41">
+        <addForeignKeyConstraint baseColumnNames="ban_reason_id" baseTableName="ban_history" constraintName="fk_ban_history_ban_reason1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ban_reason"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-42">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="ban_history" constraintName="fk_ban_history_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-43">
+        <addForeignKeyConstraint baseColumnNames="photo_id" baseTableName="post" constraintName="fk_post_photo1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="photo"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-44">
+        <addForeignKeyConstraint baseColumnNames="city_id" baseTableName="user" constraintName="fk_user_city" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="city"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-45">
+        <addForeignKeyConstraint baseColumnNames="country_id" baseTableName="user" constraintName="fk_user_country" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="country"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-46">
+        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="post_commentary" constraintName="fk_user_post_commentary_post" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="post"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-47">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="post_commentary" constraintName="fk_user_post_commentary_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-48">
+        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="user_post" constraintName="fk_user_post_post" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="post"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-49">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_post" constraintName="fk_user_post_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-50">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user" constraintName="fk_user_role" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-51">
+        <addForeignKeyConstraint baseColumnNames="friend_id" baseTableName="friend_request" constraintName="friend_request_friend_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-52">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="friend_request" constraintName="friend_request_user_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-53">
+        <addForeignKeyConstraint baseColumnNames="receiver_id" baseTableName="message" constraintName="message_receiver_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-54">
+        <addForeignKeyConstraint baseColumnNames="sender_id" baseTableName="message" constraintName="message_sender_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-55">
+        <addForeignKeyConstraint baseColumnNames="owner_id" baseTableName="photo" constraintName="photo_owner_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-56">
+        <addForeignKeyConstraint baseColumnNames="friend_id" baseTableName="user_friend" constraintName="user_friend_friend_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-57">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_friend" constraintName="user_friend_user_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="Evgeny Shilov" id="1489855088997-58">
+        <addForeignKeyConstraint baseColumnNames="main_photo_id" baseTableName="user" constraintName="user_main_photo_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="photo"/>
+    </changeSet>
+</databaseChangeLog>
