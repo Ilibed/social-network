@@ -6,7 +6,11 @@
 	<groupId>com.ilibed</groupId>
 	<artifactId>social-network</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<modules>
+		<module>social-network-frontend</module>
+		<module>social-network-frontend</module>
+	</modules>
+	<packaging>pom</packaging>
 
 	<name>social-network</name>
 	<description>Social Network</description>
@@ -23,6 +27,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<liquibase.version>3.5.3</liquibase.version>
+		<node.version>6.10.0</node.version>
+		<npm.version>4.4.4</npm.version>
 	</properties>
 
 	<dependencies>
@@ -95,6 +101,48 @@
 				<configuration>
 					<propertyFile>src/main/resources/liquibase.properties</propertyFile>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.eirslet</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>${frontend-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<nodeVersion>${node.version}</nodeVersion>
+							<npmVersion>${npm.version}</npmVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+					</execution>
+					<execution>
+						<id>bower install</id>
+						<goals>
+							<goal>bower</goal>
+						</goals>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>gulp build</id>
+						<goals>
+							<goal>gulp</goal>
+						</goals>
+						<phase>generate-resources</phase>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,0 +1,10 @@
+{
+  "name": "social-network",
+  "version": "0.1.0",
+  "dependencies": {
+    "angular": "1.6.3",
+    "angular-route": "1.6.3",
+    "angular-resource": "1.6.3"
+  },
+  "private": true
+}

@@ -22,3 +22,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+src/webapp/bower_components/
+src/webapp/node_modules/
