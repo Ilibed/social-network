@@ -8,7 +8,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Integer id;
 
     private String firstName;
 
@@ -18,21 +18,21 @@ public class User {
 
     private String password;
 
-    private Long mainPhotoId;
+    private Integer mainPhotoId;
 
-    private Long roleId;
+    private Integer roleId;
 
     private Boolean banned;
 
-    private Long countryId;
+    private Integer countryId;
 
-    private Long cityId;
+    private Integer cityId;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -68,19 +68,19 @@ public class User {
         this.password = password;
     }
 
-    public Long getMainPhotoId() {
+    public Integer getMainPhotoId() {
         return mainPhotoId;
     }
 
-    public void setMainPhotoId(Long mainPhotoId) {
+    public void setMainPhotoId(Integer mainPhotoId) {
         this.mainPhotoId = mainPhotoId;
     }
 
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
@@ -92,19 +92,19 @@ public class User {
         this.banned = banned;
     }
 
-    public Long getCountryId() {
+    public Integer getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(Long countryId) {
+    public void setCountryId(Integer countryId) {
         this.countryId = countryId;
     }
 
-    public Long getCityId() {
+    public Integer getCityId() {
         return cityId;
     }
 
-    public void setCityId(Long cityId) {
+    public void setCityId(Integer cityId) {
         this.cityId = cityId;
     }
 }
