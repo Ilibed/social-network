@@ -1,0 +1,94 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="input-group">
+            <input type="text" class="form-control" ng-model="searchParam.name" placeholder="{{ 'input.search' | translate }}">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-8 col-xs-12">
+                <div class="btn-group btn-group-justified">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="button" name="play" ng-disabled="currentMusicIndex==0" ng-click="playPrev()">
+                            <i class="glyphicon glyphicon-fast-backward"></i>
+                        </button>
+                        <button class="btn btn-default" type="button" name="play" ng-click="playSound(currentMusic, currentMusicIndex)">
+                            <i ng-show="!currentMusic.playing" class="glyphicon glyphicon-play"></i>
+                            <i ng-show="currentMusic.playing" class="glyphicon glyphicon-pause"></i>
+                        </button>
+                        <button class="btn btn-default" type="button" name="play" ng-click="playNext()">
+                            <i class="glyphicon glyphicon-fast-forward"></i>
+                        </button>
+                    </div>
+                    <div class="form-group" style="margin-left: 116px">
+                        <label class="col-sm-12 col-xs-12"><a>{{currentMusic.name}} <span class="pull-right">{{currentMusic.sound.currentTime | trackTime}}</span></a></label>
+                        <input type="range" class="col-sm-12 col-xs-12" ng-model="currentMusic.sound.progress" min="0" max="1" step="0.01">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4 col-xs-12" style="padding-top: 9px; padding-left: 0">
+                <div class="btn-group btn-group-justified">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" name="volume" ng-click="muteVolume(currentMusic)">
+                            <i ng-if="currentMusic.sound.volume>0.5 && !currentMusic.sound.muting" class="glyphicon glyphicon-volume-up"></i>
+                            <i ng-if="currentMusic.sound.volume<0.5 && currentMusic.sound.volume>0 && !currentMusic.sound.muting" class="glyphicon glyphicon-volume-down"></i>
+                            <i ng-if="currentMusic.sound.volume==0 || currentMusic.sound.muting" class="glyphicon glyphicon-volume-off"></i>
+                        </button>
+                        <button class="btn btn-default" type="submit" name="volume" ng-click="repeatMusic(currentMusic)">
+                            <i class="glyphicon glyphicon-repeat"></i>
+                            <i ng-if="currentMusic.sound.loop===0" class="glyphicon glyphicon-remove"></i>
+                            <i ng-if="currentMusic.sound.loop!==0" class="glyphicon glyphicon-ok"></i>
+                        </button>
+                    </div>
+
+                    <div style="margin-left: 95px; padding-top: 15px">
+                        <input type="range" ng-model="currentMusic.sound.volume" ng-change="changeVolume(currentMusic)" min="0" max="1" step="0.01">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <hr style="margin-top: 2%; margin-bottom: 2%">
+        <div ng-repeat="x in sounds | filter : searchParam">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="btn-group btn-group-justified">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="button" name="play" ng-click="playSound(x, $index)">
+                                <i ng-show="!x.playing" class="glyphicon glyphicon-play"></i>
+                                <i ng-show="x.playing" class="glyphicon glyphicon-pause"></i>
+                            </button>
+                        </div>
+                        <div class="form-group" style="margin-left: 42px">
+                            <label class="col-sm-12 col-xs-12"><a>{{x.name}} <span class="pull-right">{{x.sound.currentTime | trackTime}}</span></a></label>
+                            <input type="range" class="col-sm-12 col-xs-12" ng-model="x.sound.progress" min="0" max="1" step="0.01">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-xs-12" style="padding-top: 9px">
+                    <div class="btn-group btn-group-justified">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit" name="volume" ng-click="muteVolume(x)">
+                                <i ng-if="x.sound.volume>0.5 && !x.sound.muting" class="glyphicon glyphicon-volume-up"></i>
+                                <i ng-if="x.sound.volume<0.5 && x.sound.volume>0 && !x.sound.muting" class="glyphicon glyphicon-volume-down"></i>
+                                <i ng-if="x.sound.volume==0 || x.sound.muting" class="glyphicon glyphicon-volume-off"></i>
+                            </button>
+                        </div>
+
+                        <div style="margin-left: 36px; padding-top: 15px">
+                            <input type="range" ng-model="x.sound.volume" ng-change="changeVolume(x)" min="0" max="1" step="0.01">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

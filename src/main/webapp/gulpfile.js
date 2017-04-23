@@ -10,6 +10,7 @@ var install = require('gulp-install');
 var vendorJs;
 var sourceJs;
 var templatesJs;
+var ownLib;
 
 var resourcesDirectory = '../resources/static/';
 

@@ -7,6 +7,9 @@ webApp.controller("loginController", ['$scope', '$location', '$rootScope', 'logi
                 $rootScope.userInfo = value;
                 $rootScope.loggedInUser = true;
                 $location.path('/');
+            },
+            function (value) {
+                //something wrong server problem
             });
         },
         function (value) {

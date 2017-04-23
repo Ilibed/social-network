@@ -1,4 +1,4 @@
-var webApp = angular.module('socialNetworkApp', ["ngRoute", "ngCookies", "pascalprecht.translate"]);
+var webApp = angular.module('socialNetworkApp', ["ngRoute", "ngAudio", "ngCookies", "pascalprecht.translate"]);
 webApp.config(function ($routeProvider, $translateProvider) {
     $routeProvider.when('/',
         {
@@ -15,6 +15,12 @@ webApp.config(function ($routeProvider, $translateProvider) {
             templateUrl: 'views/components/registry/registry.html',
             controller: 'registryController'
         });
+    $routeProvider.when('/music',
+        {
+            templateUrl: 'views/components/music/music.html',
+            controller: 'musicController'
+        }
+    );
 
     $routeProvider.otherwise({redirectTo: '/'});
 

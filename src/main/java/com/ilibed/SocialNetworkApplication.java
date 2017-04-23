@@ -41,7 +41,7 @@ public class SocialNetworkApplication {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.authorizeRequests()
-					.antMatchers("/api/**")
+					.antMatchers("/api/users/**")
 					.hasRole("ADMIN")
 					.antMatchers("/**")
 					.permitAll()

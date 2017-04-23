@@ -24,7 +24,7 @@ webApp.factory('loginService',['$http', '$q', function ($http, $q) {
             var deferred = $q.defer();
             $http({
                 method: 'POST',
-                url: '/getuser',
+                url: '/api/auth',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
                 }

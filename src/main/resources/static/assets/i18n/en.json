@@ -1,6 +1,7 @@
 {
   "menu" : {
     "login" : "Login",
+    "registry" : "Registry",
     "brand" : "ILIBED-SOCIAL",
     "lang" : {
       "lang" : "Language",
@@ -20,7 +21,10 @@
     "name" : "Enter name",
     "surname" : "Enter surname",
     "email" : "Enter email",
-    "repeat" : "Repeat password"
+    "repeat" : "Repeat password",
+    "country" : "Enter country",
+    "city" : "Enter city",
+    "search" : "Searching"
   },
   "register" : {
     "header" : "Registration in game",
@@ -44,7 +48,9 @@
       "female" : "Female"
     },
     "email" : "Email",
-    "repeat" : "Repeat password"
+    "repeat" : "Repeat password",
+    "country" : "Country",
+    "city" : "City"
   },
   "message" : {
     "error" : {
@@ -55,7 +61,9 @@
       "surname" : "Incorrect surname",
       "birthday" : "Incorrect date",
       "email" : "Incorrect email",
-      "auth" : "Incorrect email or password"
+      "auth" : "Incorrect email or password",
+      "country" : "Invalid country",
+      "city" : "Invalid city"
     }
   }
 }

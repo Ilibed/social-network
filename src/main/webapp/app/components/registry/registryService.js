@@ -6,9 +6,9 @@ function register($http, $q, $filter) {
             var deferred = $q.defer();
             $http({
                 method: 'POST',
-                url: '/registry',
+                url: '/api/user',
                 headers: {
-                    'Content-Type': 'json'
+                    'Content-Type': 'application/json'
                 },
                 data: regInf
             }).
@@ -16,30 +16,31 @@ function register($http, $q, $filter) {
                     deferred.resolve(response.data);
                 },
                 function(response) {
-                    deferred.reject(response.status);
+                    deferred.reject(response.data);
                 });
 
             return deferred.promise;
         },
         createRegisterInf: function ($scope) {
             var regInf = {};
-            regInf.userName = $scope.username;
             regInf.password = $scope.password;
-            regInf.name = $scope.name;
-            regInf.surname = $scope.surname;
+            regInf.firstName = $scope.name;
+            regInf.lastName = $scope.surname;
             regInf.email = $scope.email;
-            regInf.sex = $scope.sex;
+            regInf.country = $scope.country;
+            regInf.city = $scope.city;
             regInf.birthday = $filter('date')($scope.birthday, "yyyy-MM-dd");
 
             return regInf;
         },
         performScope: function ($scope, value) {
-            $scope.username = value.username;
             $scope.password = "";
             $scope.repeatPassword = "";
-            $scope.name = value.name;
-            $scope.surname = value.name;
+            $scope.name = value.firstName;
+            $scope.surname = value.lastName;
             $scope.email = value.email;
+            $scope.country = value.country;
+            $scope.city = value.city;
         }
     }
 }
