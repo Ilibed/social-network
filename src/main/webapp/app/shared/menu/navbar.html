@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="site-menu" ng-show="!loggedInUser"><a href="#/login"><span class="glyphicon glyphicon-user"></span> Login</a> </li>
+            <li class="dropdown site-menu" ng-show="loggedInUser"><a class="dropdown-toggle" data-toggle="dropdown">Username<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/controller?command=LOGOUT">Logout</a></li>
+                    <li><a href="#/cabinet">Settings</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" id="Language">Lang<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a ng-click="translate('lang_ru.json', 'ru')"  id="Lang_ru">Ru</a></li>
+                    <li><a ng-click="translate('lang_en.json', 'en')"  id="Lang_en">En</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -6,7 +6,6 @@ var mainBowerFiles = require('main-bower-files');
 var runSequence = require('run-sequence');
 var series = require('stream-series');
 var install = require('gulp-install');
-var templateCache = require('gulp-angular-templatecache');
 
 var vendorJs;
 var sourceJs;
@@ -26,13 +25,13 @@ gulp.task('lib-js-files', function() {
 });
 
 gulp.task('source-js-files', function() {
-    sourceJs = gulp.src('src/js/**/*.js')
+    sourceJs = gulp.src('app/**/**/*.js')
         .pipe(concat('script.min.js'))
         .pipe(gulp.dest(resourcesDirectory + 'js'));
 });
 
 gulp.task('templates', function() {
-    templatesJs = gulp.src('src/js/**/*.html')
+    templatesJs = gulp.src('app/**/**/*.html')
         .pipe(gulp.dest(resourcesDirectory + 'views/'));
 });
 

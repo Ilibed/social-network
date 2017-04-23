@@ -1,8 +1,10 @@
 package com.ilibed.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
@@ -14,7 +16,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @Secured("ROLE_ADMIN")
     @RequestMapping("/api/user/{id}")
     @ResponseBody
     public User getUser(@PathVariable Integer id) {
