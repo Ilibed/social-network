@@ -1,0 +1,11 @@
+{
+  "menu" : {
+    "login" : "Login",
+    "brand" : "ILIBED-SOCIAL",
+    "lang" : {
+      "lang" : "Language",
+      "ru" : "Russian",
+      "en" : "English"
+    }
+  }
+}

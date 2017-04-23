@@ -35,7 +35,9 @@ public class SocialNetworkApplication {
 					.hasRole("ADMIN")
 					.antMatchers("/**")
 					.permitAll()
-					.anyRequest().authenticated();
+					.anyRequest().authenticated()
+					.and()
+					.httpBasic();
 		}
 
 		@Override

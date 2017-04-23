@@ -1,0 +1,19 @@
+#loginContainer h2{
+    text-align: center;
+}
+#loginContainer .col-sm-4 a{
+    width: 100%;
+}
+#loginForm{
+    background-color: white;
+    width: 60%;
+    margin: auto;
+    margin-top: 2%;
+    border-radius: 30px;
+    padding-bottom: 15px;
+    padding-top: 1px;
+}
+#loginForm h2{
+    text-align: center;
+    margin-top: 10%;
+}

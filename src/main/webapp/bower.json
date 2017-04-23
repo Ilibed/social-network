@@ -4,7 +4,11 @@
   "dependencies": {
     "angular": "1.6.3",
     "angular-route": "1.6.3",
-    "angular-resource": "1.6.3"
+    "angular-resource": "1.6.3",
+    "angular-cookies": "1.6.3",
+    "angular-translate": "2.15.1",
+    "angular-translate-loader-static-files": "2.15.1",
+    "angular-translate-storage-cookie": "2.15.1"
   },
   "private": true
 }

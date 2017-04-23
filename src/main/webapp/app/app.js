@@ -1,5 +1,5 @@
-var webApp = angular.module('socialNetworkApp', ["ngRoute"]);
-webApp.config(function ($routeProvider) {
+var webApp = angular.module('socialNetworkApp', ["ngRoute", "ngCookies", "pascalprecht.translate"]);
+webApp.config(function ($routeProvider, $translateProvider) {
     $routeProvider.when('/',
         {
             templateUrl: 'views/components/home/home.html',
@@ -12,14 +12,21 @@ webApp.config(function ($routeProvider) {
         });
 
     $routeProvider.otherwise({redirectTo: '/'});
+
+    $translateProvider.useCookieStorage();
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'assets/i18n/',
+        suffix: '.json'
+    });
+    $translateProvider.preferredLanguage('en');
 }).run(function($rootScope, $location) {
     $rootScope.loggedInUser = false;
 
     $rootScope.$on("$routeChangeStart", function(event, next, current) {
         if ($rootScope.loggedInUser === false) {
-            if (!((next.templateUrl == "components/registry/view.html")
+            if (!((next.templateUrl == "views/components/registry/view.html")
                 || (next.templateUrl == "views/components/login/login.html"))) {
-                $location.path("/");
+                $location.path("/login");
             }
         }
         else {
