@@ -10,7 +10,8 @@
     "gulp-inject": "4.2.0",
     "gulp-install": "0.6.0",
     "run-sequence": "1.2.2",
-    "stream-series": "0.1.1"
+    "stream-series": "0.1.1",
+    "gulp-angular-templatecache": "2.0.0"
   },
   "description": "Social Network",
   "repository": "https://github.com/Ilibed/social-network",
