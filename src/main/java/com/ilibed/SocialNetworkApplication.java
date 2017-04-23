@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @SpringBootApplication
 public class SocialNetworkApplication {
@@ -21,11 +23,19 @@ public class SocialNetworkApplication {
 	@Configuration
 	@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 	public static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 		private final UserDetailsService userDetailsService;
+		private final AuthenticationSuccessHandler authenticationSuccessHandler;
+		private final AuthenticationFailureHandler authenticationFailureHandler;
 
 		@Autowired
-		public WebSecurityConfig(UserDetailsService userDetailsService) {
+		public WebSecurityConfig(UserDetailsService userDetailsService,
+								 AuthenticationSuccessHandler authenticationSuccessHandler,
+								 AuthenticationFailureHandler authenticationFailureHandler) {
+
 			this.userDetailsService = userDetailsService;
+			this.authenticationSuccessHandler = authenticationSuccessHandler;
+			this.authenticationFailureHandler = authenticationFailureHandler;
 		}
 
 		@Override
@@ -37,7 +47,12 @@ public class SocialNetworkApplication {
 					.permitAll()
 					.anyRequest().authenticated()
 					.and()
-					.httpBasic();
+					.formLogin()
+					.successHandler(authenticationSuccessHandler)
+					.failureHandler(authenticationFailureHandler)
+					.and()
+					.csrf()
+					.disable();
 		}
 
 		@Override

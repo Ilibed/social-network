@@ -3,7 +3,7 @@ package com.ilibed.role;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "name")
+@Table(name = "role")
 public class Role {
     
     @Id
