@@ -10,6 +10,11 @@ webApp.config(function ($routeProvider, $translateProvider) {
             templateUrl: 'views/components/login/login.html',
             controller: 'loginController'
         });
+    $routeProvider.when('/registry',
+        {
+            templateUrl: 'views/components/registry/registry.html',
+            controller: 'registryController'
+        });
 
     $routeProvider.otherwise({redirectTo: '/'});
 
@@ -24,7 +29,7 @@ webApp.config(function ($routeProvider, $translateProvider) {
 
     $rootScope.$on("$routeChangeStart", function(event, next, current) {
         if ($rootScope.loggedInUser === false) {
-            if (!((next.templateUrl == "views/components/registry/view.html")
+            if (!((next.templateUrl == "views/components/registry/registry.html")
                 || (next.templateUrl == "views/components/login/login.html"))) {
                 $location.path("/login");
             }

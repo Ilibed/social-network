@@ -1,10 +1,13 @@
-webApp.controller("loginController", ['$scope', '$location', 'loginService', function($scope, $location, loginService){
+webApp.controller("loginController", ['$scope', '$location', '$rootScope', 'loginService', function($scope, $location, $rootScope, loginService){
     $scope.loginUser = function () {
         var promiseObj = loginService.doLogin($scope.username, $scope.password);
         promiseObj.then(function(value) {
-            $rootScope.userInfo = value;
-            $rootScope.loggedInUser = true;
-            $location.path('/');
+            var userPromiseObj = loginService.getUser();
+            userPromiseObj.then(function (value) {
+                $rootScope.userInfo = value;
+                $rootScope.loggedInUser = true;
+                $location.path('/');
+            });
         },
         function (value) {
             $scope.username = "";

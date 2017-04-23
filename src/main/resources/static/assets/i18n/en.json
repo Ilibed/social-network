@@ -7,5 +7,55 @@
       "ru" : "Russian",
       "en" : "English"
     }
+  },
+  "button" : {
+    "login" : "Login",
+    "register" : "Register",
+    "edit" : "Edit",
+    "submit" : "Submit"
+  },
+  "input" : {
+    "username" : "Enter username",
+    "password" : "Enter password",
+    "name" : "Enter name",
+    "surname" : "Enter surname",
+    "email" : "Enter email",
+    "repeat" : "Repeat password"
+  },
+  "register" : {
+    "header" : "Registration in game",
+    "info" : "Info!",
+    "infoMes" : "You can't change your email and login after registration."
+  },
+  "label" : {
+    "enter" : "Enter",
+    "username" : "Username",
+    "password" : "Password",
+    "remember" : "Remember me",
+    "member" : "Not a member?",
+    "signup" : "Sign up",
+    "fPass" : "Forgot password?",
+    "name" : "Name",
+    "surname" : "Surname",
+    "birthday" : "Birthday",
+    "sex" : {
+      "sex" : "Sex",
+      "male" : "Male",
+      "female" : "Female"
+    },
+    "email" : "Email",
+    "repeat" : "Repeat password"
+  },
+  "message" : {
+    "error" : {
+      "name" : "Incorrect user name!",
+      "password" : "Incorrect password",
+      "repeat" : "Incorrect repeat",
+      "username" : "Incorrect username",
+      "surname" : "Incorrect surname",
+      "birthday" : "Incorrect date",
+      "email" : "Incorrect email",
+      "auth" : "Incorrect email or password"
+    }
   }
 }
