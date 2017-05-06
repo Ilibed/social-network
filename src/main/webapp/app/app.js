@@ -1,4 +1,4 @@
-var webApp = angular.module('socialNetworkApp', ["ngRoute", "ngAudio", "ngCookies", "pascalprecht.translate"]);
+var webApp = angular.module('socialNetworkApp', ["ngRoute", "ngAudio", "ngCookies", "pascalprecht.translate", "ngFileUpload"]);
 webApp.config(function ($routeProvider, $translateProvider) {
     $routeProvider.when('/',
         {
@@ -22,7 +22,7 @@ webApp.config(function ($routeProvider, $translateProvider) {
         }
     );
 
-    $routeProvider.otherwise({redirectTo: '/'});
+    $routeProvider.otherwise({redirectTo: '/login'});
 
     $translateProvider.useCookieStorage();
     $translateProvider.useStaticFilesLoader({
@@ -36,7 +36,8 @@ webApp.config(function ($routeProvider, $translateProvider) {
     $rootScope.$on("$routeChangeStart", function(event, next, current) {
         if ($rootScope.loggedInUser === false) {
             if (!((next.templateUrl == "views/components/registry/registry.html")
-                || (next.templateUrl == "views/components/login/login.html"))) {
+                || (next.templateUrl == "views/components/login/login.html")
+                || (next.templateUrl == "views/components/music/music.html"))) {
                 $location.path("/login");
             }
         }

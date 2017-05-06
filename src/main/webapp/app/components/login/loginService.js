@@ -14,7 +14,6 @@ webApp.factory('loginService',['$http', '$q', function ($http, $q) {
                     deferred.resolve(response.data);
                 },
                 function(response) {
-                    console.dir(response.status);
                     deferred.reject(response.status);
                 });
 
