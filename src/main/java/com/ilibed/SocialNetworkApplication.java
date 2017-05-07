@@ -1,9 +1,11 @@
 package com.ilibed;
 
+import com.ilibed.message.MessageHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,6 +14,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 @SpringBootApplication
 public class SocialNetworkApplication {
@@ -59,8 +67,30 @@ public class SocialNetworkApplication {
 		public void configure(AuthenticationManagerBuilder auth) throws Exception {
 			auth.userDetailsService(userDetailsService);
 		}
+	}
 
+	@Configuration
+	@EnableWebSocket
+	public class WebSocketConfig implements WebSocketConfigurer {
 
+		@Override
+		public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+			registry.addHandler(messageHandler(),
+					"/message").addInterceptors(new HttpSessionHandshakeInterceptor());
+		}
+
+		@Bean
+		public WebSocketHandler messageHandler() {
+			return new MessageHandler();
+		}
+
+		@Bean
+		public ServletServerContainerFactoryBean createWebSocketContainer() {
+			ServletServerContainerFactoryBean container = new ServletServerContainerFactoryBean();
+			container.setMaxTextMessageBufferSize(8192);
+			container.setMaxBinaryMessageBufferSize(8192);
+			return container;
+		}
 
 	}
 }

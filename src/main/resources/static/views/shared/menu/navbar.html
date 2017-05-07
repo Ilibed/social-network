@@ -4,7 +4,7 @@
             <a class="navbar-brand" href="#">{{ 'menu.brand' | translate}}</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="dropdown" style="margin-left: 50px; padding-top: 10px; width: 250px"><short-music-player></short-music-player><a class="col-sm-6" style="padding-top: 5px; padding-bottom: 0" ng-click="changeShow()">{{currentMusic.name}}</a>
+            <li class="dropdown" style="margin-left: 50px; padding-top: 10px; width: 250px" ng-show="loggedInUser"><short-music-player></short-music-player><a class="col-sm-6" style="padding-top: 5px; padding-bottom: 0" ng-click="changeShow()">{{currentMusic.name}}</a>
                 <ul class="dropdown-menu" style="margin-left: -70%" id="musicDropdown">
                     <li>
                         <div class="container">

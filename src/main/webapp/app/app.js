@@ -21,6 +21,18 @@ webApp.config(function ($routeProvider, $translateProvider) {
             controller: 'musicController'
         }
     );
+    $routeProvider.when('/messages',
+        {
+            templateUrl: 'views/components/message/mainMessage.html',
+            controller: 'mainMessageController'
+        }
+    );
+    $routeProvider.when('/messages/:userName',
+        {
+            templateUrl: 'views/components/message/detailedMessage.html',
+            controller: 'detailedMessageController'
+        }
+    );
 
     $routeProvider.otherwise({redirectTo: '/login'});
 
