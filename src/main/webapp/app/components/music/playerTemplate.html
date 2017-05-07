@@ -45,7 +45,7 @@
                             <i ng-if="currentMusic.sound.loop===0" class="glyphicon glyphicon-remove"></i>
                             <i ng-if="currentMusic.sound.loop!==0" class="glyphicon glyphicon-ok"></i>
                         </button>
-                        <button class="btn btn-default" type="submit" name="upload" data-toggle="modal" data-target="#musicUploadModal">
+                        <button class="btn btn-default" type="submit" name="upload" ng-click="showMusicUpload()">
                             <i class="glyphicon glyphicon-plus"></i>
                         </button>
                     </div>

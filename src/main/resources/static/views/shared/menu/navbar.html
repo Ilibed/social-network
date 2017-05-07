@@ -1,14 +1,20 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-controller="menuController">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">{{ 'menu.brand' | translate}}</a>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown site-menu" style="margin-right: 50px"><a class="dropdown-toggle" data-toggle="dropdown"><short-music-player></short-music-player></a>
-                <ul class="dropdown-menu">
-                    <li><music-player></music-player></li>
+        <ul class="nav navbar-nav">
+            <li class="dropdown" style="margin-left: 50px; padding-top: 10px; width: 250px"><short-music-player></short-music-player><a class="col-sm-6" style="padding-top: 5px; padding-bottom: 0" ng-click="changeShow()">{{currentMusic.name}}</a>
+                <ul class="dropdown-menu" style="margin-left: -70%" id="musicDropdown">
+                    <li>
+                        <div class="container">
+                            <music-player></music-player>
+                        </div>
+                    </li>
                 </ul>
             </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
             <li class="site-menu" ng-show="!loggedInUser"><a href="#/login"><span class="glyphicon glyphicon-user"></span> {{ 'menu.login' | translate }}</a> </li>
             <li class="site-menu" ng-show="!loggedInUser"><a href="#/registry"><span class="glyphicon glyphicon-user"></span> {{ 'menu.registry' | translate }}</a> </li>
             <li class="dropdown site-menu" ng-show="loggedInUser"><a class="dropdown-toggle" data-toggle="dropdown">{{userInfo.lastName}} {{userInfo.firstName}}<span class="caret"></span></a>

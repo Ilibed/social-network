@@ -13,7 +13,7 @@ var templatesJs;
 var ownLib;
 
 var resourcesDirectory = '../resources/static/';
-
+var outputDirectory = '../../../target/classes/static/';
 gulp.task('install', function() {
     gulp.src(['./package.json', './bower.json'])
         .pipe(install());
@@ -45,3 +45,35 @@ gulp.task('index', function() {
 gulp.task('default', function() {
     runSequence('install', 'lib-js-files', 'templates', 'source-js-files', 'index');
 });
+/*---------------------Build tasks-------------------------------------*/
+gulp.task('lib-common-js-build', function () {
+    gulp.src(resourcesDirectory + 'js/common.js')
+        .pipe(gulp.dest(outputDirectory + 'js/'));
+});
+
+gulp.task('lib-js-files-build', function() {
+    vendorJs = gulp.src(mainBowerFiles('**/*.js'), {base: 'bower_components'})
+        .pipe(concatVendor('lib.min.js'))
+        .pipe(gulp.dest(outputDirectory + 'js'));
+});
+
+gulp.task('source-js-files-build', function() {
+    sourceJs = gulp.src('app/**/**/*.js')
+        .pipe(concat('script.min.js'))
+        .pipe(gulp.dest(outputDirectory + 'js'));
+});
+
+gulp.task('templates-build', function() {
+    templatesJs = gulp.src('app/**/**/*.html')
+        .pipe(gulp.dest(outputDirectory + 'views/'));
+});
+
+gulp.task('default-build', function() {
+    runSequence('lib-common-js-build', 'lib-js-files-build', 'templates-build', 'source-js-files-build');
+});
+/*---------------------------------------------------------*/
+/*----------------------Union default task-----------------*/
+gulp.task('default-union', function () {
+    runSequence('default', 'default-build');
+});
+/*--------------------------------------------------------*/

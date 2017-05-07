@@ -11,12 +11,12 @@
                     <div class="row">
                         <div class="form-group col-sm-6">
                             <label for="name">{{ 'label.name' | translate}}</label>
-                            <input type="text" class="form-control" id="name" name="name" required pattern="[a-zA-Z]{3,20}" ng-model="name" placeholder="{{ 'input.name' | translate}}">
+                            <input type="text" class="form-control" id="name" name="name" required pattern="[a-zA-Zа-яА-Я]{3,20}" ng-model="name" placeholder="{{ 'input.name' | translate}}">
                             <span class="help-block" ng-show="!Register.name.$valid && Register.name.$dirty">{{ 'message.error.name' | translate}}</span>
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="surname">{{ 'label.surname' | translate}}</label>
-                            <input type="text" class="form-control" id="surname" name="surname" required pattern="[a-zA-Z]{3,20}" ng-model="surname" placeholder="{{ 'input.surname' | translate}}">
+                            <input type="text" class="form-control" id="surname" name="surname" required pattern="[a-zA-Zа-яА-Я]{3,20}" ng-model="surname" placeholder="{{ 'input.surname' | translate}}">
                             <span class="help-block" ng-show="Register.surname.$invalid && Register.surname.$dirty">{{ 'message.error.surname' | translate}}</span>
                         </div>
                     </div>

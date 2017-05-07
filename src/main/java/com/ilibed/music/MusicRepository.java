@@ -22,7 +22,7 @@ public interface MusicRepository extends CrudRepository<Music, Integer> {
         music = new Music();
         music.setId(2);
         music.setName("Bitch");
-        music.setPath("assets/muz/Eminem – Bitch (feat. D12 & Dina Ray).mp3");
+        music.setPath("assets/muz/Eminem – Bitch.mp3");
         musicList.add(music);
 
         music = new Music();

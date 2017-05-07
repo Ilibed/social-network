@@ -1,0 +1,30 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                                       http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="07052017-1" author="Hramatskiu Stanislau">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="city"/>
+            <columnExists tableName="user" columnName="city_id"/>
+            <foreignKeyConstraintExists foreignKeyTableName="user" foreignKeyName="fk_user_city"/>
+            <and>
+                <tableExists tableName="country"/>
+                <columnExists tableName="user" columnName="country_id"/>
+                <foreignKeyConstraintExists foreignKeyTableName="user" foreignKeyName="fk_user_country"/>
+            </and>
+        </preConditions>
+        <!--Drop city table-->
+        <dropForeignKeyConstraint baseTableName="user" constraintName="fk_user_city"/>
+        <dropColumn tableName="user" columnName="city_id"/>
+        <dropTable tableName="city"/>
+        <!--Drop country table-->
+        <dropForeignKeyConstraint baseTableName="user" constraintName="fk_user_country"/>
+        <dropColumn tableName="user" columnName="country_id"/>
+        <dropTable tableName="country"/>
+    </changeSet>
+</databaseChangeLog>

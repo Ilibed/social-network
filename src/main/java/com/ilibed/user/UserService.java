@@ -36,8 +36,10 @@ public class UserService {
     }
 
     public void createUser(User user){
-        //preset default params
-        //then save
+        user.setBanned(false);
+        user.setMainPhotoId(1);
+        user.setRoleId(2);
+        userRepository.save(user);
     }
 
     public User getAuthUser(){

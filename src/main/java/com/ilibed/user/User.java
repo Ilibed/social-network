@@ -24,9 +24,9 @@ public class User {
 
     private Boolean banned;
 
-    private Integer countryId;
+    private String country;
 
-    private Integer cityId;
+    private String city;
 
     public Integer getId() {
         return id;
@@ -92,19 +92,19 @@ public class User {
         this.banned = banned;
     }
 
-    public Integer getCountryId() {
-        return countryId;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountryId(Integer countryId) {
-        this.countryId = countryId;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public Integer getCityId() {
-        return cityId;
+    public String getCity() {
+        return city;
     }
 
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
+    public void setCity(String city) {
+        this.city = city;
     }
 }

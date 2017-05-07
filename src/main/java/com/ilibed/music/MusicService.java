@@ -33,7 +33,7 @@ public class MusicService {
                 Files.write(path, bytes);
                 music.setName(fileName);
                 music.setPath(SOUNDS_STORE_PATH + file.getOriginalFilename());
-                musicRepository.saveMusic(music);
+                musicRepository.save(music);
             }
         }
         catch (IOException e){
@@ -45,6 +45,6 @@ public class MusicService {
     }
 
     public List<Music> getSounds(){
-        return musicRepository.getAllMusic();
+        return (List<Music>) musicRepository.findAll();
     }
 }

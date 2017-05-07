@@ -25,12 +25,12 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<User> createUser(@RequestBody User user){
         System.out.print(user.getEmail());
-        if (userService.isEmailExists(user.getEmail())){
+        if (!userService.isEmailExists(user.getEmail())){
             userService.createUser(user);
-            return new ResponseEntity<User>(user, HttpStatus.CONFLICT);
+            return new ResponseEntity<User>(user, HttpStatus.OK);
         }
 
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        return new ResponseEntity<User>(user, HttpStatus.CONFLICT);
     }
 
     @RequestMapping("/api/auth")

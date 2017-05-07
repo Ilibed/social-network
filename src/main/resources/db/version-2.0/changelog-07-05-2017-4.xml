@@ -1,0 +1,46 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                                       http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <!--Music inserts-->
+    <changeSet id="07052017-4" author="Hramatskiu Stanislau">
+        <insert tableName="music">
+            <column name="name" type="VARCHAR(255)" value="Big city life"/>
+            <column name="path" type="VARCHAR(255)" value="assets/muz/Eminem – Big city life.mp3"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="07052017-4-1" author="Hramatskiu Stanislau">
+        <insert tableName="music">
+            <column name="name" type="VARCHAR(255)" value="Bitch"/>
+            <column name="path" type="VARCHAR(255)" value="assets/muz/Eminem – Bitch.mp3"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="07052017-4-2" author="Hramatskiu Stanislau">
+        <insert tableName="music">
+            <column name="name" type="VARCHAR(255)" value="Brainless"/>
+            <column name="path" type="VARCHAR(255)" value="assets/muz/Eminem – Brainless.mp3"/>
+        </insert>
+    </changeSet>
+
+    <!--Role insert-->
+    <changeSet id="07052017-4-3" author="Hramatskiu Stanislau">
+        <insert tableName="role">
+            <column name="name" type="VARCHAR(45)" value="PRIMARY_USER"/>
+        </insert>
+    </changeSet>
+
+    <!--Photo insert-->
+    <changeSet id="07052017-4-4" author="Hramatskiu Stanislau">
+        <insert tableName="photo">
+            <column name="owner_id" type="INT(11)" value="1"/>
+            <column name="path" type="VARCHAR(45)" value="assets/img/avatar.png"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

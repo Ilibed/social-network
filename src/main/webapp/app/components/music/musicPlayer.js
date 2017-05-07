@@ -88,6 +88,10 @@ webApp.directive('musicPlayer', function($rootScope, ngAudio, musicLoadService) 
                 }
             };
 
+            scope.showMusicUpload = function () {
+                commonModule.showMusicLoadModal();
+            };
+
             scope.setNewFile = function (newFile) {
                 scope.file = newFile;
             };
