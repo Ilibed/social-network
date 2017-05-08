@@ -61,4 +61,8 @@ public class UserService {
         Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, grantedAuthorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
+
+    public Integer getIdByEmail(String email){
+        return userRepository.findIdByEmail(email);
+    }
 }
