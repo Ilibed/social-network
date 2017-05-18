@@ -27,7 +27,7 @@ webApp.config(function ($routeProvider, $translateProvider) {
             controller: 'mainMessageController'
         }
     );
-    $routeProvider.when('/messages/:userName',
+    $routeProvider.when('/messages/:id',
         {
             templateUrl: 'views/components/message/detailedMessage.html',
             controller: 'detailedMessageController'

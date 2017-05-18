@@ -32,6 +32,21 @@ webApp.factory('messageService',[function () {
         send: function (message) {
             var outMessage = JSON.stringify(message);
             socket.send(outMessage);
+        },
+        getAllMessagesForUser: function (userId) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET', 
+                url: '/api/get/sounds', 
+                params: {id: userId}
+            }).then(function(response) {
+                    deferred.resolve(response.data);
+                },
+                function(response) {
+                    deferred.reject(response.status);
+                });
+
+            return deferred.promise;
         }
     }
 }]);

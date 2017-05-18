@@ -3,7 +3,9 @@ package com.ilibed.message;
 import com.ilibed.user.UserService;
 import com.ilibed.util.GsonHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MessageService {
     private MessageRepository messageRepository;
     private UserService userService;

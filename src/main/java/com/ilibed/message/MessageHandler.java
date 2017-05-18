@@ -11,12 +11,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class MessageHandler extends TextWebSocketHandler {
     private static Map<Integer, WebSocketSession> sessionMap = new ConcurrentHashMap<>();
-    private MessageService messageService;
-
+    
     @Autowired
-    public MessageHandler(MessageService messageService){
-        this.messageService = messageService;
-    }
+    private MessageService messageService;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {

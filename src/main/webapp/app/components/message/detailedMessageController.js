@@ -8,6 +8,19 @@ webApp.controller("detailedMessageController",['$scope', '$rootScope', 'messageS
         'time' : ''
     };
     $scope.messageList = [];
+
+    $scope.$on("$routeChangeSuccess", function () {
+        var id = $routeParams["id"];
+        if(id!=='undefined'){
+            if ($rootScope.messages.get(id).length = 0){
+                var promiseObj=messageService.getAllMessagesForUser(id);
+                promiseObj.then(function(value) {
+
+                });
+            }
+        }
+    });
+
     messageService.initSocket();
     
     var pushNewMessage = function (newMessage) {

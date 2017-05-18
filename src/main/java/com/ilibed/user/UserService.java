@@ -48,6 +48,10 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication.isAuthenticated()){
             String email = ((UserDetails) authentication.getPrincipal()).getUsername();
+            Integer id = userRepository.findIdByEmail(email);
+            SimpleUser simpleUser = userRepository.findById(id);
+            String fullName = simpleUser.getFullName();
+            String photo = simpleUser.getPhotoPath();
             user = getUserByEmail(email);
         }
 
