@@ -1,12 +1,57 @@
 <div class="panel panel-primary">
-    <div class="panel-heading"><h2>{{user.name}}</h2></div>
+    <div class="panel-heading"><h2></h2></div>
     <div class="panel-body">
-        <form id='comp_$ID' method='post' class='row'>
-            <div class='form-group' style='border: 2px solid #2b542c; padding: 20px; border-radius: 5px'>
-                <button value='$ID' class='close' type='button'>&times</button>
-                <h5 style='color: #2b542c'>Creation date: $DATE</h5>
-                <p  style='overflow: auto;color: #737373'>$BODY</p>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img src="http://placehold.it/380x400" height="380" width="400" alt="" class="img-rounded img-responsive" />
+                        </div>
+                        <div class="col-sm-6 col-md-8">
+                            <h4>ИМЯ ПОЛЬЗОВАТЕЛЯ</h4>
+                            <small><cite>АДРЕС<i class="glyphicon glyphicon-map-marker"></i></cite></small>
+                            <br>
+                            <i class="glyphicon glyphicon-envelope"></i>EMAIL ПОЛЬЗОВАТЕЛЯ
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-block-lg submit pull-right" style="margin-left: 10px">Send message</button>
+                            <button type="submit" class="btn btn-primary btn-block-lg submit pull-right">Add to friends</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="well well-sm">
+                    <form method='post'>
+                        <div class='form-group'>
+                            <textarea class="form-control input-lg" id="newPost" name="newPost" placeholder="Create your post here..."></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-block-lg submit pull-right">Send</button>
+                            <br>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="well well-sm">
+                    <form method='post'>
+                        <div class='form-group'>
+                            <button value='$ID' class='close' type='button'>&times</button>
+                            <h5>Creation date: ДАТА</h5>
+                            <p  style='overflow: auto'>ТЕЛО ПОСТА</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>
