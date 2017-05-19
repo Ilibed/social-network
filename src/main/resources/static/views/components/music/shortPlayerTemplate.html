@@ -1,0 +1,19 @@
+<div class="btn-group col-sm-6">
+    <div class="input-group-btn" ng-show="currentMusicIndex!=null">
+        <button class="btn btn-default" type="button" name="play" ng-disabled="currentMusicIndex==0" ng-click="playPrev()">
+            <i class="glyphicon glyphicon-fast-backward"></i>
+        </button>
+        <button class="btn btn-default" type="button" name="play" ng-click="playSound(currentMusic, currentMusicIndex)">
+            <i ng-show="!currentMusic.playing" class="glyphicon glyphicon-play"></i>
+            <i ng-show="currentMusic.playing" class="glyphicon glyphicon-pause"></i>
+        </button>
+        <button class="btn btn-default" type="button" name="play" ng-click="playNext()">
+            <i class="glyphicon glyphicon-fast-forward"></i>
+        </button>
+    </div>
+    <div class="input-group-btn" ng-show="currentMusicIndex==null">
+        <button class="btn btn-default" type="button" name="music">
+            <i class="glyphicon glyphicon-music"></i>
+        </button>
+    </div>
+</div>

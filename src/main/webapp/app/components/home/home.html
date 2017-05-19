@@ -1,7 +1,12 @@
 <div class="panel panel-primary">
-    <div class="panel-heading"><h2>Main</h2></div>
+    <div class="panel-heading"><h2>{{user.name}}</h2></div>
     <div class="panel-body">
-        Do main
+        <form id='comp_$ID' method='post' class='row'>
+            <div class='form-group' style='border: 2px solid #2b542c; padding: 20px; border-radius: 5px'>
+                <button value='$ID' class='close' type='button'>&times</button>
+                <h5 style='color: #2b542c'>Creation date: $DATE</h5>
+                <p  style='overflow: auto;color: #737373'>$BODY</p>
+            </div>
+        </form>
     </div>
-
 </div>

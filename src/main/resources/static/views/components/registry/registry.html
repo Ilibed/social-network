@@ -1,0 +1,59 @@
+<div class="row">
+    <div id="registerForm">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h2>{{ 'register.header' | translate}}</h2></div>
+            <div class="panel-body">
+                <div class="alert alert-info alert-dismissable">
+                    <a class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <strong>{{ 'register.info' | translate}}</strong> {{ 'register.infoMes' | translate}}
+                </div>
+                <form name="Register" ng-submit="register()">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="name">{{ 'label.name' | translate}}</label>
+                            <input type="text" class="form-control" id="name" name="name" required pattern="[a-zA-Zа-яА-Я]{3,20}" ng-model="name" placeholder="{{ 'input.name' | translate}}">
+                            <span class="help-block" ng-show="!Register.name.$valid && Register.name.$dirty">{{ 'message.error.name' | translate}}</span>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="surname">{{ 'label.surname' | translate}}</label>
+                            <input type="text" class="form-control" id="surname" name="surname" required pattern="[a-zA-Zа-яА-Я]{3,20}" ng-model="surname" placeholder="{{ 'input.surname' | translate}}">
+                            <span class="help-block" ng-show="Register.surname.$invalid && Register.surname.$dirty">{{ 'message.error.surname' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="name">{{ 'label.country' | translate}}</label>
+                            <input type="text" class="form-control" name="country" required ng-model="country" placeholder="{{ 'input.country' | translate}}">
+                            <span class="help-block" ng-show="!Register.country.$valid && Register.country.$dirty">{{ 'message.error.country' | translate}}</span>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="surname">{{ 'label.city' | translate}}</label>
+                            <input type="text" class="form-control" name="city" required ng-model="city" placeholder="{{ 'input.city' | translate}}">
+                            <span class="help-block" ng-show="Register.city.$invalid && Register.city.$dirty">{{ 'message.error.city' | translate}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">{{ 'label.email' | translate}}</label>
+                        <input type="email" class="form-control" id="email" name="email" required ng-model="email" placeholder="{{ 'input.email' | translate}}">
+                        <span class="help-block" ng-show="Register.email.$invalid && Register.email.$dirty">{{ 'message.error.email' | translate}}</span>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="pwd">{{ 'label.password' | translate}}</label>
+                            <input type="password" class="form-control" id="pwd" name="password" required pattern="[a-zA-Z0-9]{3,20}" ng-model="password" placeholder="{{ 'input.password' | translate}}">
+                            <span class="help-block" ng-show="Register.password.$invalid && Register.password.$dirty">{{ 'message.error.password' | translate}}</span>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="repeatPassword">{{ 'label.repeat' | translate}}</label>
+                            <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required pattern="[a-zA-Z0-9]{3,20}" ng-model="repeatPassword" placeholder="{{ 'input.repeat' | translate}}">
+                            <span class="help-block" ng-show="Register.repeatPassword.$invalid && Register.repeatPassword.$dirty">{{ 'message.error.repeat' | translate}}</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block-xs submit" ng-disabled="Register.$invalid">{{ 'button.register' | translate}}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -42,8 +42,18 @@ webApp.config(function ($routeProvider, $translateProvider) {
         suffix: '.json'
     });
     $translateProvider.preferredLanguage('en');
-}).run(function($rootScope, $location) {
+}).run(function($rootScope, $location, loginService) {
     $rootScope.loggedInUser = false;
+
+    var userPromiseObj = loginService.getUser();
+    userPromiseObj.then(function (value) {
+            $rootScope.userInfo = value;
+            $rootScope.loggedInUser = true;
+        },
+        function (value) {
+            //something wrong server problem
+        });
+
 
     $rootScope.$on("$routeChangeStart", function(event, next, current) {
         if ($rootScope.loggedInUser === false) {
