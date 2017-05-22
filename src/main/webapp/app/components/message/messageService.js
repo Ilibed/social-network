@@ -1,7 +1,7 @@
 /**
  * Created by gs on 07.05.2017.
  */
-webApp.factory('messageService',[function () {
+webApp.factory('messageService',['$http', '$q', function ($http, $q) {
     var socket;
     var messageSuccessCallback;
     var messageErrorCallback;
@@ -37,8 +37,8 @@ webApp.factory('messageService',[function () {
             var deferred = $q.defer();
             $http({
                 method: 'GET', 
-                url: '/api/get/sounds', 
-                params: {id: userId}
+                url: '/api/get/messages',
+                params: {userId: userId}
             }).then(function(response) {
                     deferred.resolve(response.data);
                 },

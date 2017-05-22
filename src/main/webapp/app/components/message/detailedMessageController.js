@@ -1,42 +1,31 @@
 /**
  * Created by gs on 07.05.2017.
  */
-webApp.controller("detailedMessageController",['$scope', '$rootScope', 'messageService', function ($scope, $rootScope, messageService) {
+webApp.controller("detailedMessageController",['$scope', '$rootScope', '$routeParams', 'messageService', function ($scope, $rootScope, $routeParams, messageService) {
     $scope.message = {
-        'body' : '',
-        'sender' : $rootScope.userInfo.username,
-        'time' : ''
+        'subject' : '',
+        'senderId' : $rootScope.userInfo.id,
+        'receiverId' : {},
+        'sendDate' : ''
     };
-    $scope.messageList = [];
+    $scope.userId = {};
+    $scope.messages = [];
 
     $scope.$on("$routeChangeSuccess", function () {
         var id = $routeParams["id"];
         if(id!=='undefined'){
-            if ($rootScope.messages.get(id).length = 0){
-                var promiseObj=messageService.getAllMessagesForUser(id);
-                promiseObj.then(function(value) {
-
-                });
-            }
+            $scope.userId = id;
+            $scope.message.receiverId = id;
         }
     });
-
-    messageService.initSocket();
-    
-    var pushNewMessage = function (newMessage) {
-        $scope.messageList.push(newMessage);
-    };
-
-    var handleErrorMessage = function (newMessage) {
-        console.dir(newMessage);
-    };
-    
-    messageService.setMessageCallbacks(pushNewMessage, handleErrorMessage);
     
     $scope.sendMessage = function () {
         var date = new Date();
-        $scope.message.time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        var month = date.getMonth() + 1;
+        $scope.message.sendDate = date.getFullYear() + "-" + month + "-" + date.getDate() + " " +
+            date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        console.dir($scope.message);
         messageService.send($scope.message);
-        $scope.message.body = '';
+        $scope.message.subject = '';
     }
 }]);

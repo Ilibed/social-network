@@ -4,10 +4,10 @@
     </div>
     <div class="panel-body">
         <div>
-            <div ng-repeat="x in messageList">
+            <div ng-repeat="x in messageList[userId].messageList">
                 <div>
-                    <p ng-show="x.sender!=userInfo.username"><span style="color: red">{{x.sender}}</span>: {{x.body}}<span class="pull-right text-muted">{{x.time}}</span></p>
-                    <p class="text-info" ng-show="x.sender==userInfo.username" style="text-align: right">{{x.body}}</p>
+                    <p ng-show="x.senderId!=userInfo.id"><span style="color: red">{{messageList[userId].simpleUser.fullName}}</span>: {{x.subject}}<span class="pull-right text-muted">{{x.sendDate}}</span></p>
+                    <p class="text-info" ng-show="x.senderId==userInfo.id" style="text-align: right">{{x.subject}}</p>
                 </div>
             </div>
         </div>

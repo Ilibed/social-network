@@ -1,0 +1,24 @@
+<div class="panel panel-default" id="chatPanel">
+    <div class="panel-heading">
+        <h4>Messaging</h4>
+    </div>
+    <div class="panel-body">
+        <div>
+            <div ng-repeat="x in messageList">
+                <div>
+                    <!-- Left-aligned media object -->
+                    <div class="media">
+                        <div class="media-left">
+                            <img ng-src="{{x.simpleUser.photoPath}}" class="media-object" style="width:60px">
+                        </div>
+                        <div class="media-body" ng-click="viewDetailedMessage(x[x.length - 1])">
+                            <h4 class="media-heading">{{x.simpleUser.fullName}}<span class="pull-right text-muted">{{x.messageList[x.messageList.length - 1].sendDate}}</span></h4>
+                            <p>{{x.messageList[x.messageList.length - 1].subject}}</p>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
