@@ -1,5 +1,6 @@
 package com.ilibed.music;
 
+import com.ilibed.cloud.CloudStorage;
 import com.ilibed.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,6 @@ import java.util.List;
 
 @Service
 public class MusicService {
-    private final static String SOUNDS_LOAD_PATH = "../static/assets/muz/";
-    private final static String SOUNDS_STORE_PATH = "assets/muz/";
     private final MusicRepository musicRepository;
 
     @Autowired
@@ -29,11 +28,15 @@ public class MusicService {
         try {
             if (!file.isEmpty()) {
                 bytes = file.getBytes();
-                Path path = new File(SOUNDS_LOAD_PATH + file.getOriginalFilename()).toPath();
+                File savedFile = new File(file.getOriginalFilename());
+                Path path = savedFile.toPath();
+                System.out.print(path);
                 Files.write(path, bytes);
+                String cloudPath = CloudStorage.uploadFile(savedFile);
                 music.setName(fileName);
-                music.setPath(SOUNDS_STORE_PATH + file.getOriginalFilename());
+                music.setPath(cloudPath);
                 musicRepository.save(music);
+                savedFile.delete();
             }
         }
         catch (IOException e){
