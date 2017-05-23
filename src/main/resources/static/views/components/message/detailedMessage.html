@@ -6,7 +6,15 @@
         <div>
             <div ng-repeat="x in messageList[userId].messageList">
                 <div>
-                    <p ng-show="x.senderId!=userInfo.id"><span style="color: red">{{messageList[userId].simpleUser.fullName}}</span>: {{x.subject}}<span class="pull-right text-muted">{{x.sendDate}}</span></p>
+                    <div class="media" ng-show="x.senderId!=userInfo.id">
+                        <div class="media-left">
+                            <img ng-src="{{messageList[userId].simpleUser.photoPath}}" class="media-object" style="width:60px">
+                        </div>
+                        <div class="media-body" ng-click="viewDetailedMessage(x.messageList[x.messageList.length - 1])">
+                            <h4 class="media-heading">{{messageList[userId].simpleUser.fullName}}<span class="pull-right text-muted">{{x.sendDate}}</span></h4>
+                            <p>{{x.subject}}</p>
+                        </div>
+                    </div>
                     <p class="text-info" ng-show="x.senderId==userInfo.id" style="text-align: right">{{x.subject}}</p>
                 </div>
             </div>
@@ -16,7 +24,7 @@
         <form role="form" name="Chat" ng-submit="sendMessage()" style="padding-bottom: 30px">
             <div class="form-group">
                 <label for="message">Message: </label>
-                <input class="form-control" required id="message" ng-model="message.body"/>
+                <input class="form-control" required id="message" ng-model="message.subject"/>
             </div>
             <button type="submit" class="btn btn-info btn-md pull-right" ng-disabled="Chat.$invalid">Send</button>
         </form>

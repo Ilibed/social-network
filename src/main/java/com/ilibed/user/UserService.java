@@ -24,18 +24,22 @@ public class UserService {
     }
 
     public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return email != null ? userRepository.findByEmail(email) : null;
     }
 
     public User getUserById(Integer id) {
-        return userRepository.findOne(id);
+        return id != null ? userRepository.findOne(id) : null;
     }
 
     public boolean isEmailExists(String email){
-        return userRepository.existsByEmail(email);
+        return email != null && userRepository.existsByEmail(email);
     }
 
     public void createUser(User user){
+        if(user == null){
+            throw new NullPointerException("UserService, create user : user parameter is null");
+        }
+
         user.setBanned(false);
         user.setMainPhotoId(1);
         user.setRoleId(2);
@@ -63,7 +67,7 @@ public class UserService {
     }
 
     public Integer getIdByEmail(String email){
-        return userRepository.findIdByEmail(email);
+        return email != null ? userRepository.findIdByEmail(email) : -1;
     }
 
     public SimpleUser getSimpleUserInfo(Integer id){

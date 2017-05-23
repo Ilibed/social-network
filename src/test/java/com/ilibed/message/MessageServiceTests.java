@@ -1,4 +1,4 @@
-package com.ilibed;
+package com.ilibed.message;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,11 +10,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-public class SocialNetworkApplicationTests {
+public class MessageServiceTests {
 
-	@Test
-	public void contextLoads() {
-		Assert.assertEquals(0, 0);
-	}
+    @Test
+    public void contextLoads() {
+        Assert.assertEquals(0, 0);
+    }
 
 }
