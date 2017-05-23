@@ -1,0 +1,22 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                                       http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="23052017-6" author="Hramatskiu Stanislau">
+        <insert tableName="photo">
+            <column name="id" type="INT(11)" value="2" />
+            <column name="owner_id" type="INT(11)" value="1" />
+            <column name="path" type="VARCHAR(255)" value="" />
+        </insert>
+        <rollback>
+            <delete tableName="photo">
+                <where>id=2</where>
+            </delete>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

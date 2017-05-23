@@ -67,6 +67,16 @@ public class UserService {
         return user;
     }
 
+    public Integer getAuthId(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.isAuthenticated()){
+            String email = ((UserDetails) authentication.getPrincipal()).getUsername();
+            return getIdByEmail(email);
+        }
+
+        return null;
+    }
+
     public void setAuthUser(User user){
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
@@ -89,5 +99,9 @@ public class UserService {
         }
 
         return userRepository.findSimpleById(id);
+    }
+
+    public PresentationUser getPresentationUser(Integer id){
+        return userRepository.findPresentationUser(id);
     }
 }

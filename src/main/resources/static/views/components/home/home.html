@@ -1,34 +1,34 @@
-<div class="panel panel-primary">
-    <div class="panel-heading"><h2></h2></div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="well well-sm">
+            <div class="row">
+                <div class="col-sm-4">
+                    <img ng-src="{{user.photoPath}}" height="380" width="400" alt="" class="img-rounded img-responsive" />
+                </div>
+                <div class="col-sm-6 col-md-8">
+                    <h4>{{user.fullName}}</h4>
+                    <small><cite>{{user.fullAddress}}<i class="glyphicon glyphicon-map-marker"></i></cite></small>
+                    <br>
+                    <i class="glyphicon glyphicon-envelope"></i>{{user.email}}
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-block-lg submit pull-right" style="margin-left: 10px">Send message</button>
+                    <button type="submit" class="btn btn-primary btn-block-lg submit pull-right">Add to friends</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="panel-body">
 
         <div class="row">
             <div class="col-xs-12">
                 <div class="well well-sm">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <img src="http://placehold.it/380x400" height="380" width="400" alt="" class="img-rounded img-responsive" />
-                        </div>
-                        <div class="col-sm-6 col-md-8">
-                            <h4>ИМЯ ПОЛЬЗОВАТЕЛЯ</h4>
-                            <small><cite>АДРЕС<i class="glyphicon glyphicon-map-marker"></i></cite></small>
-                            <br>
-                            <i class="glyphicon glyphicon-envelope"></i>EMAIL ПОЛЬЗОВАТЕЛЯ
-                            <br>
-                            <button type="submit" class="btn btn-primary btn-block-lg submit pull-right" style="margin-left: 10px">Send message</button>
-                            <button type="submit" class="btn btn-primary btn-block-lg submit pull-right">Add to friends</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="well well-sm">
-                    <form method='post'>
+                    <form ng-submit="addPost()">
                         <div class='form-group'>
-                            <textarea class="form-control input-lg" id="newPost" name="newPost" placeholder="Create your post here..."></textarea>
+                            <textarea class="form-control input-lg" id="newPost" name="newPost" ng-model="text" placeholder="Create your post here..."></textarea>
+                            <br>
+                            <div class="input-group">
+                                <input type="file" onchange="angular.element(this).scope().setNewFile(this.files[0])" name="file" accept="image/*">
+                            </div>
                             <br>
                             <button type="submit" class="btn btn-primary btn-block-lg submit pull-right">Send</button>
                             <br>
@@ -38,20 +38,32 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="well well-sm">
-                    <form method='post'>
-                        <div class='form-group'>
-                            <button value='$ID' class='close' type='button'>&times</button>
-                            <h5>Creation date: ДАТА</h5>
-                            <p  style='overflow: auto'>ТЕЛО ПОСТА</p>
+        <div ng-repeat="x in posts | orderBy : 'creationDate' : true">
+            <hr style="margin-top: 2%; margin-bottom: 2%">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="well well-sm">
+                        <div class="media" style="margin-bottom: 3%">
+                            <button value='$ID' class='close' type='button' ng-click="deletePost(x)">&times</button>
+                            <div class="media-left">
+                                <img ng-src="{{x.simpleUser.photoPath}}" class="media-object" style="width:60px">
+                            </div>
+                            <div class="media-body" ng-click="viewDetailedMessage(x.messageList[x.messageList.length - 1])">
+                                <h4 class="media-heading">{{x.simpleUser.fullName}}<span class="pull-right text-muted">{{x.postProjection.creationDate}}</span></h4>
+                            </div>
                         </div>
-                    </form>
+                        <div class="thumbnail">
+                            <a href="/w3images/lights.jpg">
+                                <img ng-src="{{x.postProjection.photoPath}}" style="width:100%">
+                                <div class="caption">
+                                    <p>{{x.postProjection.text}}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
 
     </div>
 </div>

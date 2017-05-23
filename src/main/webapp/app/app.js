@@ -1,6 +1,6 @@
 var webApp = angular.module('socialNetworkApp', ["ngRoute", "ngAudio", "ngCookies", "pascalprecht.translate", "ngFileUpload"]);
 webApp.config(function ($routeProvider, $translateProvider) {
-    $routeProvider.when('/',
+    $routeProvider.when('/user/:id',
         {
             templateUrl: 'views/components/home/home.html',
             controller: 'homeController'

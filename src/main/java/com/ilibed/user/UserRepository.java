@@ -2,6 +2,7 @@ package com.ilibed.user;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,6 +15,11 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("select u.id as id, u.firstName as firstName, u.lastName as lastName," +
             " p.path as path from User u, com.ilibed.photo.Photo p where p.id=u.mainPhotoId and u.id=?1")
     SimpleUser findSimpleById(Integer id);
+
+    @Query("select u.id as id, u.firstName as firstName, u.lastName as lastName," +
+            " p.path as path, u.email as email, u.city as city, u.country as country" +
+            " from User u, com.ilibed.photo.Photo p where p.id=u.mainPhotoId and u.id=?1")
+    PresentationUser findPresentationUser(Integer id);
 
     User findByEmail(String email);
 

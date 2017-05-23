@@ -17,14 +17,13 @@ public class UserController {
 
     @RequestMapping("/api/user/{id}")
     @ResponseBody
-    public User getUser(@PathVariable Integer id) {
-        return userService.getUserById(id);
+    public PresentationUser getUser(@PathVariable Integer id) {
+        return userService.getPresentationUser(id);
     }
 
     @RequestMapping(value = "/api/user")
     @ResponseBody
     public ResponseEntity<User> createUser(@RequestBody User user){
-        System.out.print(user.getEmail());
         if (!userService.isEmailExists(user.getEmail())){
             userService.createUser(user);
             return new ResponseEntity<User>(user, HttpStatus.OK);
