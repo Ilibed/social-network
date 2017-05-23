@@ -22,10 +22,18 @@ public class MessageService {
     }
 
     public Integer getSenderIdByEmail(String email){
+        if(email == null){
+            throw new NullPointerException("MessageService, getSenderIdByEmail : email parameter is null");
+        }
+
         return userService.getIdByEmail(email);
     }
 
     public Message createMessage(String messageData, Integer senderId){
+        if(messageData == null){
+            throw new NullPointerException("MessageService, getSenderIdByEmail : messageData parameter is null");
+        }
+
         Message message = GsonHandler.fromJson(Message.class, messageData);
         message.setSenderId(senderId);
 
@@ -33,19 +41,30 @@ public class MessageService {
     }
 
     public Message saveMessage(Message message){
+        if(message == null){
+            throw new NullPointerException("MessageService, saveMessage : message parameter is null");
+        }
+
         return messageRepository.save(message);
     }
 
     public String getStringMessageDescription(Message message){
+        if(message == null){
+            throw new NullPointerException("MessageService, getStringMessageDescription : message parameter is null");
+        }
         return GsonHandler.toJson(message);
     }
 
     public List<Message> findAllMessages(Integer userId){
         //return (List<Message>) messageRepository.findAllBySenderIdOrReceiverId(userId, userId);
-        return messageRepository.findAllMessagesForUser(userId);
+        return userId != null ? messageRepository.findAllMessagesForUser(userId) : null;
     }
 
     public Map<Integer, MessagesDTOObject> findAllMessagesAsMap(Integer userId){
+        if(userId == null){
+            throw new NullPointerException("MessageService, findAllMessagesAsMap : userId parameter is null");
+        }
+
         List<Message> messages = findAllMessages(userId);
         Map<Integer, MessagesDTOObject> messageMap = new HashMap<>();
 

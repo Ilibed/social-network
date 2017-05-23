@@ -32,16 +32,13 @@ public class UserServiceTests  {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void getUserIdByEmail_NullEmail_ShouldReturnNegativeValue(){
+    @Test(expected = NullPointerException.class)
+    public void getUserIdByEmail_NullEmail_ShouldThrowNullPointerException(){
         //arrange
         String underTest = null;
 
         //act
         int actual = userService.getIdByEmail(underTest);
-
-        //assert
-        Assert.assertTrue(actual < 0);
     }
 
     @Test
@@ -68,20 +65,17 @@ public class UserServiceTests  {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void getUserByEmail_NullEmail_ShouldReturnNull(){
         //arrange
         String underTest = null;
 
         //act
         User actual = userService.getUserByEmail(underTest);
-
-        //assert
-        Assert.assertNull(actual);
     }
 
     @Test
-    public void getUserById_AdminId_ShouldReturnAdminUser(){
+    public void getUserById_AdminId_ShouldThrowNullPointerException(){
         //arrange
         Integer underTest = 1;
 
@@ -116,8 +110,8 @@ public class UserServiceTests  {
         Assert.assertNull(actual);
     }
 
-    @Test
-    public void getUserById_NullId_ShouldReturnNull(){
+    @Test(expected = NullPointerException.class)
+    public void getUserById_NullId_ShouldThrowNullPointerException(){
         //arrange
         Integer underTest = null;
 
@@ -192,12 +186,11 @@ public class UserServiceTests  {
     }
 
     @Test(expected = NullPointerException.class)
-    public void createUser_NullParameter_ShouldThrowException(){
+    public void createUser_NullParameter_ShouldThrowNullPointerException(){
         //arrange
         User underTest = null;
 
         //act
         userService.createUser(underTest);
-
     }
 }

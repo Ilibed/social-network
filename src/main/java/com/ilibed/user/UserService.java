@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +25,19 @@ public class UserService {
     }
 
     public User getUserByEmail(String email) {
-        return email != null ? userRepository.findByEmail(email) : null;
+        if(email == null){
+            throw new NullPointerException("UserService, getUserByEmail : email parameter is null");
+        }
+
+        return userRepository.findByEmail(email);
     }
 
     public User getUserById(Integer id) {
-        return id != null ? userRepository.findOne(id) : null;
+        if(id == null){
+            throw new NullPointerException("UserService, getUserById : id parameter is null");
+        }
+
+        return userRepository.findOne(id);
     }
 
     public boolean isEmailExists(String email){
@@ -37,7 +46,7 @@ public class UserService {
 
     public void createUser(User user){
         if(user == null){
-            throw new NullPointerException("UserService, create user : user parameter is null");
+            throw new NullPointerException("UserService, createUser : user parameter is null");
         }
 
         user.setBanned(false);
@@ -67,10 +76,18 @@ public class UserService {
     }
 
     public Integer getIdByEmail(String email){
-        return email != null ? userRepository.findIdByEmail(email) : -1;
+        if(email == null){
+            throw new NullPointerException("UserService, getIdByEmail : email parameter is null");
+        }
+
+        return userRepository.findIdByEmail(email);
     }
 
     public SimpleUser getSimpleUserInfo(Integer id){
+        if(id == null){
+            throw new NullPointerException("UserService, getSimpleUserInfo : id parameter is null");
+        }
+
         return userRepository.findSimpleById(id);
     }
 }
