@@ -11,8 +11,8 @@
                     <br>
                     <i class="glyphicon glyphicon-envelope"></i>{{user.email}}
                     <br>
-                    <button type="submit" class="btn btn-primary btn-block-lg submit pull-right" style="margin-left: 10px">Send message</button>
-                    <button type="submit" class="btn btn-primary btn-block-lg submit pull-right">Add to friends</button>
+                    <button type="submit" class="btn btn-primary btn-block-lg submit pull-right" style="margin-left: 10px">{{ 'button.sendMessage' | translate}}</button>
+                    <button type="submit" class="btn btn-primary btn-block-lg submit pull-right">{{ 'button.addToFriends' | translate}}</button>
                 </div>
             </div>
         </div>
@@ -24,13 +24,13 @@
                 <div class="well well-sm">
                     <form ng-submit="addPost()">
                         <div class='form-group'>
-                            <textarea class="form-control input-lg" id="newPost" name="newPost" ng-model="text" placeholder="Create your post here..."></textarea>
+                            <textarea class="form-control input-lg" id="newPost" name="newPost" ng-model="text" placeholder="{{ 'input.createPost' | translate}}"></textarea>
                             <br>
                             <div class="input-group">
                                 <input type="file" onchange="angular.element(this).scope().setNewFile(this.files[0])" name="file" accept="image/*">
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-primary btn-block-lg submit pull-right">Send</button>
+                            <button type="submit" class="btn btn-primary btn-block-lg submit pull-right">{{ 'button.send' | translate}}</button>
                             <br>
                         </div>
                     </form>

@@ -7,13 +7,27 @@
       "lang" : "Language",
       "ru" : "Russian",
       "en" : "English"
-    }
+    },
+    "logout" : "Logout",
+    "settings" : "Settings"
+  },
+  "sidebar" : {
+    "home" : "Home",
+    "messages" : "Messages",
+    "music" : "Music",
+    "friends" : "Friends",
+    "settings" : "Settings"
   },
   "button" : {
     "login" : "Login",
     "register" : "Register",
     "edit" : "Edit",
-    "submit" : "Submit"
+    "submit" : "Submit",
+    "save" : "Save",
+    "send" : "Send",
+    "addToFriends" : "Add to friends",
+    "remove" : "Remove",
+    "sendMessage" : "Send message"
   },
   "input" : {
     "username" : "Enter username",
@@ -24,7 +38,8 @@
     "repeat" : "Repeat password",
     "country" : "Enter country",
     "city" : "Enter city",
-    "search" : "Searching"
+    "search" : "Searching",
+    "createPost" : "Create your post here..."
   },
   "register" : {
     "header" : "Registration in game",
@@ -50,7 +65,8 @@
     "email" : "Email",
     "repeat" : "Repeat password",
     "country" : "Country",
-    "city" : "City"
+    "city" : "City",
+    "message" : "Message"
   },
   "message" : {
     "error" : {
