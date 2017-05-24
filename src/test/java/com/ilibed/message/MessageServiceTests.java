@@ -15,6 +15,8 @@ public class MessageServiceTests {
 
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private MessageRepository messageRepository;
 
     @Test
     public void createMessage_CorrectParameters_ShouldReturnMessageObject(){
@@ -79,5 +81,25 @@ public class MessageServiceTests {
 
         //act
         Integer actual = messageService.getSenderIdByEmail(underTest);
+    }
+
+    @Test
+    public void saveMessage_ExistingUsers_ShouldSaveMessageToDatabase(){
+        //arrange
+        Message underTest = new Message();
+        underTest.setId(null);
+        underTest.setReceiverId(1);
+        underTest.setSendDate("23.05.2017");
+        underTest.setSubject("Some text");
+        underTest.setSenderId(1);
+
+        //act
+        Message actual = messageService.saveMessage(underTest);
+
+        //assert
+        Assert.assertTrue(messageRepository.exists(actual.getId()));
+
+        //clean
+        messageRepository.delete(actual);
     }
 }
