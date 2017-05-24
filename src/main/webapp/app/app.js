@@ -33,6 +33,18 @@ webApp.config(function ($routeProvider, $translateProvider) {
             controller: 'detailedMessageController'
         }
     );
+    $routeProvider.when('/friends',
+        {
+            templateUrl: 'views/components/friends/friends.html',
+            controller: 'friendsController'
+        }
+    );
+    $routeProvider.when('/settings',
+        {
+            templateUrl: 'views/components/friends/settings.html',
+            controller: 'settingsController'
+        }
+    );
 
     $routeProvider.otherwise({redirectTo: '/login'});
 
