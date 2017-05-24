@@ -58,6 +58,8 @@ public class SocialNetworkApplication {
 					.formLogin()
 					.successHandler(authenticationSuccessHandler)
 					.failureHandler(authenticationFailureHandler)
+                    .and()
+                    .logout().logoutSuccessUrl("/#/login")
 					.and()
 					.csrf()
 					.disable();

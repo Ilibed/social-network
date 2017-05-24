@@ -56,8 +56,11 @@ public class MessageService {
     }
 
     public List<Message> findAllMessages(Integer userId){
-        //return (List<Message>) messageRepository.findAllBySenderIdOrReceiverId(userId, userId);
-        return userId != null ? messageRepository.findAllMessagesForUser(userId) : null;
+        if(userId == null){
+            throw new NullPointerException("MessageService, findAllMessages : userId parameter is null");
+        }
+
+        return messageRepository.findAllMessagesForUser(userId);
     }
 
     public Map<Integer, MessagesDTOObject> findAllMessagesAsMap(Integer userId){

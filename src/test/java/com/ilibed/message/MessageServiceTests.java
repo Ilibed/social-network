@@ -102,4 +102,13 @@ public class MessageServiceTests {
         //clean
         messageRepository.delete(actual);
     }
+
+    @Test(expected = NullPointerException.class)
+    public void saveMessage_NullMessage_ShouldThrowNullPointerException(){
+        //arrange
+        Message underTest = null;
+
+        //act
+        Message actual = messageService.saveMessage(underTest);
+    }
 }
