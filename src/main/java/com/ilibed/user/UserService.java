@@ -21,11 +21,14 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserFriendRepository userFriendRepository;
     private final PhotoService photoService;
 
     @Autowired
-    public UserService(UserRepository userRepository, PhotoService photoService) {
+    public UserService(UserRepository userRepository, UserFriendRepository userFriendRepository,
+                       PhotoService photoService) {
         this.userRepository = userRepository;
+        this.userFriendRepository = userFriendRepository;
         this.photoService = photoService;
     }
 
@@ -77,6 +80,49 @@ public class UserService {
         userRepository.update(name, surname, country, city, photo.getId(), ownerId);
 
         return userRepository.findOne(ownerId);
+    }
+
+    public SimpleUser addToFriend(Integer userId){
+        Integer ownerId = getAuthId();
+        if (ownerId == null){
+            return null;
+        }
+
+        UserFriend userFriend = new UserFriend();
+        userFriend.setFriendId(userId);
+        userFriend.setUserId(ownerId);
+        userFriendRepository.save(userFriend);
+
+        return userRepository.findSimpleById(userId);
+    }
+
+    public List<SimpleUser> getUserFriends(){
+        Integer ownerId = getAuthId();
+        if (ownerId == null){
+            return null;
+        }
+
+        return userRepository.findUserFriends(ownerId);
+    }
+
+    public List<SimpleUser> getUsers(){
+        Integer ownerId = getAuthId();
+        if (ownerId == null){
+            return null;
+        }
+
+        List<Integer> ids = userFriendRepository.findFriends(ownerId);
+        ids.add(ownerId);
+
+        return userRepository.findUsersWithoutOwner(ids);
+    }
+
+    public void removeFriend(Integer userId){
+        Integer ownerId = getAuthId();
+        if (ownerId != null){
+            UserFriend userFriend = userFriendRepository.findByUserIdAndFriendId(ownerId, userId);
+            userFriendRepository.delete(userFriend.getId());
+        }
     }
 
     public User getAuthUser(){

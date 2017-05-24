@@ -15,6 +15,12 @@ var commonModule = (function () {
                 show: true
             });
         },
+        showMessageModal: function () {
+            $('#newMessage').modal({
+                backdrop: false,
+                show: true
+            });
+        },
         hideMusicLoadModal: function () {
             $('#musicUploadModal').modal('hide');
         }

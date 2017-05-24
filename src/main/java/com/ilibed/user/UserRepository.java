@@ -23,6 +23,14 @@ public interface UserRepository extends CrudRepository<User, Integer> {
             " from User u, com.ilibed.photo.Photo p where p.id=u.mainPhotoId and u.id=?1")
     PresentationUser findPresentationUser(Integer id);
 
+    @Query("select u.id as id, u.firstName as firstName, u.lastName as lastName, p.path as path " +
+            "from User u, Photo p, UserFriend uf where uf.userId=?1 and u.id=uf.friendId and p.id=u.mainPhotoId")
+    List<SimpleUser> findUserFriends(Integer id);
+
+    @Query("select u.id as id, u.firstName as firstName, u.lastName as lastName," +
+            " p.path as path from User u, com.ilibed.photo.Photo p where p.id=u.mainPhotoId and u.id not in ?1")
+    List<SimpleUser> findUsersWithoutOwner(List<Integer> ids);
+
     User findByEmail(String email);
 
     boolean existsByEmail(String email);

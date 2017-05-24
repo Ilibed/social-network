@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 
@@ -36,7 +38,7 @@ public class UserController {
 
     @RequestMapping(value = "/api/user/update")
     @ResponseBody
-    public ResponseEntity<User> updateUser(@RequestParam(value = "file", required = false) MultipartFile file,
+    public ResponseEntity<User> updateUser(@RequestParam(value = "file") MultipartFile file,
                                            @RequestParam("name") String name,
                                            @RequestParam("surname") String surname,
                                            @RequestParam("country") String country,
@@ -53,6 +55,50 @@ public class UserController {
         }
 
         return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping("/api/friend/add/{id}")
+    @ResponseBody
+    public ResponseEntity<SimpleUser> addToFriend(@PathVariable("id") Integer id){
+        SimpleUser simpleUser = userService.addToFriend(id);
+
+        if (simpleUser == null){
+            return new ResponseEntity<SimpleUser>(simpleUser, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<SimpleUser>(simpleUser, HttpStatus.OK);
+    }
+
+    @RequestMapping("/api/friend/remove/{id}")
+    @ResponseBody
+    public ResponseEntity<Boolean> removeFriend(@PathVariable("id") Integer id){
+        userService.removeFriend(id);
+
+        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+    }
+
+    @RequestMapping("/api/get/friends")
+    @ResponseBody
+    public ResponseEntity<List<SimpleUser>> getUserFriends(){
+        List<SimpleUser> simpleUsers = userService.getUserFriends();
+
+        if (simpleUsers == null){
+            return new ResponseEntity<List<SimpleUser>>(simpleUsers, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<List<SimpleUser>>(simpleUsers, HttpStatus.OK);
+    }
+
+    @RequestMapping("/api/get/users")
+    @ResponseBody
+    public ResponseEntity<List<SimpleUser>> getUsers(){
+        List<SimpleUser> simpleUsers = userService.getUsers();
+
+        if (simpleUsers == null){
+            return new ResponseEntity<List<SimpleUser>>(simpleUsers, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<List<SimpleUser>>(simpleUsers, HttpStatus.OK);
     }
 
     @RequestMapping("/api/auth")
