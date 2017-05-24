@@ -24,7 +24,7 @@ public class UserServiceTests  {
     private User user;
 
     @Before
-    public void createUsers(){
+    public void createUser(){
         user = new User();
         user.setFirstName("User");
         user.setLastName("User");
@@ -40,7 +40,7 @@ public class UserServiceTests  {
     }
 
     @After
-    public void deleteUsers(){
+    public void deleteUser(){
         userRepository.delete(user);
     }
 

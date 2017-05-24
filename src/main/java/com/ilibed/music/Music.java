@@ -35,4 +35,24 @@ public class Music {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Music music = (Music) o;
+
+        if (id != null ? !id.equals(music.id) : music.id != null) return false;
+        if (path != null ? !path.equals(music.path) : music.path != null) return false;
+        return name != null ? name.equals(music.name) : music.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (path != null ? path.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
 }

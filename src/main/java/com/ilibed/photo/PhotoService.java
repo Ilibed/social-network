@@ -30,9 +30,16 @@ public class PhotoService {
     }
 
     public Photo createPhoto(MultipartFile file, Integer ownerId) throws ServiceException{
+        if(file == null){
+            throw new NullPointerException("PhotoService, createPhoto : file parameter is null");
+        }
+
+        if(ownerId == null){
+            throw new NullPointerException("PhotoService, createPhoto : ownerId parameter is null");
+        }
+
         Photo photo = new Photo();
         byte[] bytes;
-        Music music = new Music();
 
         try {
             if (!file.isEmpty()) {

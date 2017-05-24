@@ -22,6 +22,16 @@ public class MusicService {
     }
 
     public Music saveMusic(MultipartFile file, String fileName) throws ServiceException{
+
+        if(file == null){
+            throw new NullPointerException("MusicService, saveMusic : file parameter is null");
+        }
+
+        if(fileName == null){
+            throw new NullPointerException("MusicService, saveMusic : fileName parameter is null");
+        }
+
+
         byte[] bytes;
         Music music = new Music();
 

@@ -49,10 +49,16 @@ public class PostService {
     }
 
     public Post savePost(Post post){
+        if(post == null){
+            throw new NullPointerException("PostService, savePost : post parameter is null");
+        }
         return postRepository.save(post);
     }
 
     public UserPost saveUserPost(UserPost userPost){
+        if(userPost == null){
+            throw new NullPointerException("PostService, saveUserPost : userPost parameter is null");
+        }
         return userPostRepository.save(userPost);
     }
 
@@ -68,8 +74,11 @@ public class PostService {
     }
 
     public void deletePost(Integer userPostId){
+        if(userPostId == null){
+            throw new NullPointerException("PostService, deletePost : userPostId parameter is null");
+        }
         Integer postId = userPostRepository.findOne(userPostId).getPostId();
-        userPostRepository.delete(postId);
+        userPostRepository.delete(userPostId);
         postRepository.delete(postId);
     }
 
