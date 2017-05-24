@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3>Settings</h3>
+        <h5>{{ 'menu.settings' | translate}}</h5>
     </div>
     <div class="panel-body">
         <div class="row container-fluid">
@@ -35,9 +35,9 @@
                     </div>
 
                     <div class="input-group">
-                        <input type="file" onchange="angular.element(this).scope().setNewFile(this.files[0])" name="file" accept="image/*">
+                        <input type="file" onchange="angular.element(this).scope().setNewFile(this.files[0])" name="file" placeholder="" accept="image/*">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block-xs submit pull-right" ng-disabled="Register.$invalid">Save</button>
+                    <button type="submit" class="btn btn-primary btn-block-xs submit pull-right" ng-disabled="Register.$invalid">{{ 'button.save' | translate}}</button>
                 </form>
             </div>
         </div>
