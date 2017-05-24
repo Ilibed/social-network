@@ -39,12 +39,6 @@ webApp.config(function ($routeProvider, $translateProvider) {
             controller: 'friendsController'
         }
     );
-    $routeProvider.when('/settings',
-        {
-            templateUrl: 'views/components/settings/settings.html',
-            controller: 'settingsController'
-        }
-    );
 
     $routeProvider.otherwise({redirectTo: '/login'});
 

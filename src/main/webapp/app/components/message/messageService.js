@@ -2,7 +2,7 @@
  * Created by gs on 07.05.2017.
  */
 webApp.factory('messageService',['$http', '$q', function ($http, $q) {
-    var socket;
+    var socket = null;
     var messageSuccessCallback;
     var messageErrorCallback;
 
@@ -18,12 +18,14 @@ webApp.factory('messageService',['$http', '$q', function ($http, $q) {
 
     return{
         initSocket: function () {
-            socket = new WebSocket("ws://localhost:8080/message");
+            if (socket == null){
+                socket = new WebSocket("ws://localhost:8080/message");
 
-            socket.onmessage = function(event) {
-                var incomingMessage = event.data;
-                showMessage(incomingMessage);
-            };
+                socket.onmessage = function(event) {
+                    var incomingMessage = event.data;
+                    showMessage(incomingMessage);
+                };
+            }
         },
         setMessageCallbacks: function (successCallback, errorCallback) {
             messageSuccessCallback = successCallback;

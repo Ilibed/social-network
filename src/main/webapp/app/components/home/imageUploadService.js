@@ -23,6 +23,27 @@ webApp.factory('imageUploadService',['$q', '$http', 'Upload', function ($q, $htt
 
             return deferred.promise;
         },
+        editUserInfo: function (file, name, surname, country, city) {
+            var deferred = $q.defer();
+            Upload.upload({
+                url: '/api/user/update',
+                fields: {
+                    'name': name,
+                    'surname': surname,
+                    'country': country,
+                    'city': city
+                },
+                file: file
+            }).then(function(response) {
+                    deferred.resolve(response.data);
+                },
+                function(response) {
+                    deferred.reject(response.status);
+                }
+            );
+
+            return deferred.promise;
+        },
         getPosts: function () {
             var deferred = $q.defer();
             $http({

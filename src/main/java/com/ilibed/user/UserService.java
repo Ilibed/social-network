@@ -1,5 +1,8 @@
 package com.ilibed.user;
 
+import com.ilibed.exception.ServiceException;
+import com.ilibed.photo.Photo;
+import com.ilibed.photo.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -9,8 +12,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +21,12 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PhotoService photoService;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PhotoService photoService) {
         this.userRepository = userRepository;
+        this.photoService = photoService;
     }
 
     public User getUserByEmail(String email) {
@@ -53,6 +58,25 @@ public class UserService {
         user.setMainPhotoId(1);
         user.setRoleId(2);
         userRepository.save(user);
+    }
+
+    public User updateUser(MultipartFile file, String name, String surname, String country, String city) throws ServiceException{
+        Integer ownerId = getAuthId();
+        if (ownerId == null){
+            return null;
+        }
+
+        Photo photo;
+        if (file == null){
+            photo = photoService.findById(1);
+        }
+        else {
+            photo = photoService.savePhoto(photoService.createPhoto(file, ownerId));
+        }
+
+        userRepository.update(name, surname, country, city, photo.getId(), ownerId);
+
+        return userRepository.findOne(ownerId);
     }
 
     public User getAuthUser(){
