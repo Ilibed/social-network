@@ -1,6 +1,8 @@
 package com.ilibed.user;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +21,39 @@ public class UserServiceTests  {
     @Autowired
     private UserRepository userRepository;
 
+    private User user;
+
+    @Before
+    public void createUsers(){
+        user = new User();
+        user.setFirstName("User");
+        user.setLastName("User");
+        user.setEmail("user@gmail.com");
+        user.setPassword("1234567");
+        user.setMainPhotoId(null);
+        user.setRoleId(2);
+        user.setBanned(false);
+        user.setCity("");
+        user.setCountry("");
+
+        user = userRepository.save(user);
+    }
+
+    @After
+    public void deleteUsers(){
+        userRepository.delete(user);
+    }
+
     @Test
-    public void getUserIdByEmail_AdminEmail_ShouldReturnAdminId(){
+    public void getUserIdByEmail_UserEmail_ShouldReturnUserId(){
         //arrange
-        String underTest = "ilibed.socialnetwork@gmail.com";
+        String underTest = user.getEmail();
 
         //act
         int actual = userService.getIdByEmail(underTest);
 
         //assert
-        int expected = 1;
+        int expected = user.getId();
         Assert.assertEquals(expected, actual);
     }
 
@@ -42,26 +67,15 @@ public class UserServiceTests  {
     }
 
     @Test
-    public void getUserByEmail_AdminEmail_ShouldReturnAdminUser(){
+    public void getUserByEmail_UserEmail_ShouldReturnUser(){
         //arrange
-        String underTest = "ilibed.socialnetwork@gmail.com";
+        String underTest = user.getEmail();
 
         //act
         User actual = userService.getUserByEmail(underTest);
 
         //assert
-        User expected = new User();
-        expected.setId(1);
-        expected.setFirstName("Admin");
-        expected.setLastName("Admin");
-        expected.setEmail("ilibed.socialnetwork@gmail.com");
-        expected.setPassword("1234567");
-        expected.setMainPhotoId(null);
-        expected.setRoleId(1);
-        expected.setBanned(false);
-        expected.setCity("");
-        expected.setCountry("");
-
+        User expected = user;
         Assert.assertEquals(expected, actual);
     }
 
@@ -75,26 +89,15 @@ public class UserServiceTests  {
     }
 
     @Test
-    public void getUserById_AdminId_ShouldThrowNullPointerException(){
+    public void getUserById_UserId_ShouldReturnUser(){
         //arrange
-        Integer underTest = 1;
+        Integer underTest = user.getId();
 
         //act
         User actual = userService.getUserById(underTest);
 
         //assert
-        User expected = new User();
-        expected.setId(1);
-        expected.setFirstName("Admin");
-        expected.setLastName("Admin");
-        expected.setEmail("ilibed.socialnetwork@gmail.com");
-        expected.setPassword("1234567");
-        expected.setMainPhotoId(null);
-        expected.setRoleId(1);
-        expected.setBanned(false);
-        expected.setCity("");
-        expected.setCountry("");
-
+        User expected = user;
         Assert.assertEquals(actual, expected);
     }
 
@@ -125,7 +128,7 @@ public class UserServiceTests  {
     @Test
     public void isEmailExists_ExistingEmail_ShouldReturnTrue(){
         //arrange
-        String underTest = "ilibed.socialnetwork@gmail.com";
+        String underTest = user.getEmail();
 
         //act
         boolean actual = userService.isEmailExists(underTest);
