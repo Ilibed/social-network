@@ -77,7 +77,11 @@ public class PostService {
         if(userPostId == null){
             throw new NullPointerException("PostService, deletePost : userPostId parameter is null");
         }
-        Integer postId = userPostRepository.findOne(userPostId).getPostId();
+        UserPost userPost = userPostRepository.findOne(userPostId);
+        if(userPost == null){
+            return;
+        }
+        Integer postId = userPost.getPostId();
         userPostRepository.delete(userPostId);
         postRepository.delete(postId);
     }

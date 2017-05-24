@@ -212,6 +212,23 @@ public class PostServiceTests {
 
         //assert
         Assert.assertFalse(userPostRepository.exists(userPost.getId()));
+    }
 
+    @Test
+    public void deletePost_NotExistingUserPostId_ShouldReturnSilently(){
+        //arrange
+        Integer underTest = 123456789;
+
+        //act
+        postService.deletePost(underTest);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void deletePost_NullParameter_ShouldThrowNullPointerException(){
+        //arrange
+        Integer underTest = null;
+
+        //act
+        postService.deletePost(underTest);
     }
 }
