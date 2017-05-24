@@ -41,7 +41,7 @@ webApp.config(function ($routeProvider, $translateProvider) {
     );
     $routeProvider.when('/settings',
         {
-            templateUrl: 'views/components/friends/settings.html',
+            templateUrl: 'views/components/settings/settings.html',
             controller: 'settingsController'
         }
     );
