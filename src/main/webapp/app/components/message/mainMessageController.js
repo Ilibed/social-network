@@ -21,8 +21,8 @@ webApp.controller("mainMessageController",['$scope', '$rootScope', '$location', 
     });
 
     var pushNewMessage = function (newMessage) {
-        var userId = newMessage.receiverId == $rootScope.userInfo.id ? newMessage.senderId : newMessage.receiverId;
-        if (userId in Object.keys($rootScope.messageList)){
+        var userId = "" + (newMessage.receiverId == $rootScope.userInfo.id ? newMessage.senderId : newMessage.receiverId);
+        if (Object.keys($rootScope.messageList).indexOf(userId) != -1){
             $rootScope.messageList[userId].messageList.push(newMessage);
         }
         else {
@@ -42,6 +42,7 @@ webApp.controller("mainMessageController",['$scope', '$rootScope', '$location', 
             );
         }
 
+        $rootScope.$apply();
     };
 
     var handleErrorMessage = function (newMessage) {
