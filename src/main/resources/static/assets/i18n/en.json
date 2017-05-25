@@ -25,9 +25,8 @@
     "submit" : "Submit",
     "save" : "Save",
     "send" : "Send",
-    "addToFriends" : "Add to friends",
-    "remove" : "Remove",
-    "sendMessage" : "Send message"
+    "add" : "Add to friends",
+    "remove" : "Remove"
   },
   "input" : {
     "username" : "Enter username",
@@ -66,7 +65,10 @@
     "repeat" : "Repeat password",
     "country" : "Country",
     "city" : "City",
-    "message" : "Message"
+    "photo" : "Photo",
+    "message" : "Message",
+    "sendMessage" : "Send message",
+    "editProfile" : "Edit profile"
   },
   "message" : {
     "error" : {
