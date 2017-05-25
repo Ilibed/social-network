@@ -3,7 +3,6 @@ package com.ilibed.user;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +29,12 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("select u.id as id, u.firstName as firstName, u.lastName as lastName," +
             " p.path as path from User u, com.ilibed.photo.Photo p where p.id=u.mainPhotoId and u.id not in ?1")
     List<SimpleUser> findUsersWithoutOwner(List<Integer> ids);
+
+    @Query("SELECT 'Messages' AS activityName, COUNT(*) AS activityValue " +
+            " FROM message m" +
+            " WHERE m.sender_id = ?1" +
+            " GROUP BY m.sender_id")
+    List<UserActivity> findUserActivities(Integer id);
 
     User findByEmail(String email);
 
