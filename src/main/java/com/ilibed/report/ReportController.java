@@ -20,12 +20,14 @@ public class ReportController {
 
     @RequestMapping(value = "/api/print/{printName}/{userId}")
     @ResponseBody
-    public ResponseEntity<String> updateUser(@PathVariable("printName") String name,
+    public ResponseEntity<ReportDTO> updateUser(@PathVariable("printName") String name,
                                              @PathVariable("userId") Integer userId) {
 
         try {
             String reportPath = reportService.generateActivityReport(userId);
-            return new ResponseEntity<>(reportPath, HttpStatus.OK);
+            ReportDTO reportDTO = new ReportDTO();
+            reportDTO.setPath(reportPath);
+            return new ResponseEntity<>(reportDTO, HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

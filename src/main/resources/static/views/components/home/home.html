@@ -12,7 +12,7 @@
                     <i class="glyphicon glyphicon-envelope"></i>{{user.email}}
                     <br>
                     <button ng-show="userInfo.id!=user.id" type="button" data-toggle="modal" data-target="#newMessage" class="btn btn-primary btn-block-lg submit pull-right" style="margin-left: 10px">{{ 'button.sendMessage' | translate}}</button>
-                    <!--<button ng-show="userInfo.id!=user.id" type="submit" class="btn btn-primary btn-block-lg submit pull-right">Add to friends</button>-->
+                    <button ng-show="userInfo.id==user.id" type="button" data-toggle="modal" data-target="#printStat" class="btn btn-primary btn-block-lg submit pull-right">Print statistic</button>
                     <button ng-show="userInfo.id==user.id" type="button" data-toggle="modal" data-target="#editProfile" class="btn btn-primary btn-block-lg submit pull-right" style="margin-left: 10px">{{ 'button.edit' | translate}}</button>
                 </div>
             </div>
@@ -153,6 +153,40 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-default pull-right" ng-disabled="Register.$invalid">{{ 'button.save' | translate}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="printStat" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="closeModal()">&times;</button>
+                <h4 class="modal-title">{{ 'label.editProfile' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" id="printForm" ng-submit="printStat()" name="Print">
+                    <div class="row col-sm-12">
+                        <div class="form-group col-sm-11">
+                            <label for="name">{{ 'label.name' | translate}}</label>
+                            <select required ng-model="selectedName" ng-options="x for x in names">
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-11">
+                            <a ng-show="printUrl.length!=0" href="{{printUrl}}" download="{{selectedName}}.xls">Download - {{selectedName}}.xls</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default pull-right" ng-disabled="Print.$invalid">{{ 'button.save' | translate}}</button>
                         </div>
                     </div>
                 </form>

@@ -23,11 +23,11 @@ public class ReportService {
     public String generateActivityReport(int userId) throws IOException {
         ReportGenerator generator = new UserActivityReportGenerator(userRepository);
         byte[] reportBytes = generator.generateReport(userId);
-        return uploadReport("activity", "xlsx", reportBytes);
+        return uploadReport("activity", "xls", reportBytes);
     }
 
     private String uploadReport(String filename, String extension, byte[] data) throws IOException {
-        File savedFile = new File(filename);
+        File savedFile = new File(filename + "." + extension);
         Path path = savedFile.toPath();
         Files.write(path, data);
         String cloudPath = CloudStorage.uploadFile(savedFile);

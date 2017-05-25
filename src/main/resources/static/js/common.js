@@ -23,6 +23,9 @@ var commonModule = (function () {
         },
         hideMusicLoadModal: function () {
             $('#musicUploadModal').modal('hide');
+        },
+        hidePrintModal: function () {
+            $('#printStat').modal('hide');
         }
     }
 })();

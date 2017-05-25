@@ -1,8 +1,10 @@
-webApp.controller("homeController", ['$scope', '$routeParams', '$rootScope', 'userService', 'postService', 'imageUploadService', 'messageService', function($scope, $routeParams, $rootScope, userService, postService, imageUploadService, messageService){
+webApp.controller("homeController", ['$scope', '$routeParams', '$rootScope', 'userService', 'postService', 'imageUploadService', 'messageService', 'printService', function($scope, $routeParams, $rootScope, userService, postService, imageUploadService, messageService, printService){
     $scope.file = {};
     $scope.avatarFile = {};
     $scope.text = "";
     $scope.posts = [];
+    $scope.names = ["activity", "etc"];
+    $scope.printUrl = "";
     $scope.message = {
         'subject' : '',
         'senderId' : $rootScope.userInfo.id,
@@ -110,5 +112,23 @@ webApp.controller("homeController", ['$scope', '$routeParams', '$rootScope', 'us
         console.dir($scope.message);
         messageService.send($scope.message);
         $scope.message.subject = '';
+    };
+
+    $scope.printStat = function () {
+        var promiseObj=printService.printActivity($scope.selectedName, $scope.user.id);
+        promiseObj.then(function(value) {
+                $scope.printUrl = value.path;
+            },
+            function (value) {
+                //can be logging
+                console.dir(value);
+            }
+        );
+    };
+
+    $scope.closeModal = function () {
+        $scope.printUrl = "";
+        $scope.selectedName = "";
+        commonModule.hidePrintModal();
     }
 }]);

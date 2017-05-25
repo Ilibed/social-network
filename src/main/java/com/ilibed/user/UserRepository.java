@@ -30,10 +30,10 @@ public interface UserRepository extends CrudRepository<User, Integer> {
             " p.path as path from User u, com.ilibed.photo.Photo p where p.id=u.mainPhotoId and u.id not in ?1")
     List<SimpleUser> findUsersWithoutOwner(List<Integer> ids);
 
-    @Query("SELECT 'Messages' AS activityName, COUNT(*) AS activityValue " +
-            " FROM message m" +
-            " WHERE m.sender_id = ?1" +
-            " GROUP BY m.sender_id")
+    @Query("SELECT 'Messages' AS activityName, COUNT(m.id) AS activityValue " +
+            " FROM Message m" +
+            " WHERE m.senderId = ?1" +
+            " GROUP BY m.senderId")
     List<UserActivity> findUserActivities(Integer id);
 
     User findByEmail(String email);
