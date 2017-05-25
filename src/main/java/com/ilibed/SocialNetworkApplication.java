@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.web.socket.WebSocketHandler;
@@ -46,6 +48,11 @@ public class SocialNetworkApplication {
 			this.authenticationFailureHandler = authenticationFailureHandler;
 		}
 
+		@Bean
+		public PasswordEncoder passwordEncoder() {
+			return new BCryptPasswordEncoder();
+		}
+
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.authorizeRequests()
@@ -67,7 +74,7 @@ public class SocialNetworkApplication {
 
 		@Override
 		public void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.userDetailsService(userDetailsService);
+			auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 		}
 	}
 

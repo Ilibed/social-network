@@ -10,7 +10,7 @@ webApp.controller("homeController", ['$scope', '$routeParams', '$rootScope', 'us
         'sendDate' : ''
     };
     messageService.initSocket();
-    if ($rootScope.messageList == null){
+    if (!$rootScope.listInit){
         messageService.setMessageCallbacks(function (newMessage) {
 
             },

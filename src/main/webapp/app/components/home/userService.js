@@ -16,6 +16,20 @@ webApp.factory('userService',['$http', '$q', function ($http, $q) {
                 });
 
             return deferred.promise;
+        },
+        getSimpleUser: function (userId) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api//user/simple/' + userId
+            }).then(function(response) {
+                    deferred.resolve(response.data);
+                },
+                function(response) {
+                    deferred.reject(response.status);
+                });
+
+            return deferred.promise;
         }
     }
 }]);

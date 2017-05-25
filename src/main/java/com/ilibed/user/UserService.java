@@ -8,9 +8,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,6 +58,8 @@ public class UserService {
             throw new NullPointerException("UserService, createUser : user parameter is null");
         }
 
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setBanned(false);
         user.setMainPhotoId(1);
         user.setRoleId(2);
@@ -92,6 +95,10 @@ public class UserService {
         userFriend.setFriendId(userId);
         userFriend.setUserId(ownerId);
         userFriendRepository.save(userFriend);
+        userFriend = new UserFriend();
+        userFriend.setUserId(userId);
+        userFriend.setFriendId(ownerId);
+        userFriendRepository.save(userFriend);
 
         return userRepository.findSimpleById(userId);
     }
@@ -122,14 +129,15 @@ public class UserService {
         if (ownerId != null){
             UserFriend userFriend = userFriendRepository.findByUserIdAndFriendId(ownerId, userId);
             userFriendRepository.delete(userFriend.getId());
+            userFriend = userFriendRepository.findByUserIdAndFriendId(userId, ownerId);
+            userFriendRepository.delete(userFriend.getId());
         }
     }
 
     public User getAuthUser(){
         User user = null;
-        SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication.isAuthenticated()){
+        if (authentication.isAuthenticated() && !(authentication.getPrincipal().getClass() == String.class)){
             String email = ((UserDetails) authentication.getPrincipal()).getUsername();
             user = getUserByEmail(email);
         }

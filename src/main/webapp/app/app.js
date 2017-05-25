@@ -50,6 +50,7 @@ webApp.config(function ($routeProvider, $translateProvider) {
     $translateProvider.preferredLanguage('en');
 }).run(function($rootScope, $location, loginService) {
     $rootScope.loggedInUser = false;
+    $rootScope.listInit = false;
 
     var userPromiseObj = loginService.getUser();
     userPromiseObj.then(function (value) {

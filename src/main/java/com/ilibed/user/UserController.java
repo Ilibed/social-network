@@ -110,4 +110,15 @@ public class UserController {
 
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
+
+    @RequestMapping("/api/user/simple/{id}")
+    public ResponseEntity<SimpleUser> getSimpleUser(@PathVariable("id") Integer id){
+        SimpleUser simpleUser = userService.getSimpleUserInfo(id);
+
+        if (simpleUser == null){
+            return new ResponseEntity<SimpleUser>(simpleUser, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<SimpleUser>(simpleUser, HttpStatus.OK);
+    }
 }

@@ -9,7 +9,7 @@ webApp.controller('friendsController', ['$scope', '$rootScope', 'friendService',
         'sendDate' : ''
     };
     messageService.initSocket();
-    if ($rootScope.messageList == null){
+    if (!$rootScope.listInit){
         messageService.setMessageCallbacks(function (newMessage) {
 
             },
@@ -77,6 +77,7 @@ webApp.controller('friendsController', ['$scope', '$rootScope', 'friendService',
         var month = date.getMonth() + 1;
         $scope.message.sendDate = date.getFullYear() + "-" + month + "-" + date.getDate() + " " +
             date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        $scope.message.receiverId = $scope.user.id;
         console.dir($scope.message);
         messageService.send($scope.message);
         $scope.message.subject = '';

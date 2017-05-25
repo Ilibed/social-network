@@ -1,9 +1,10 @@
 /**
  * Created by gs on 07.05.2017.
  */
-webApp.controller("mainMessageController",['$scope', '$rootScope', '$location', 'messageService', function ($scope, $rootScope, $location, messageService) {
+webApp.controller("mainMessageController",['$scope', '$rootScope', '$location', 'messageService', 'userService', function ($scope, $rootScope, $location, messageService, userService) {
     $scope.$on("$routeChangeSuccess", function () {
-        if ($rootScope.messageList == null){
+        if (!$rootScope.listInit){
+            $rootScope.listInit = true;
             messageService.initSocket();
             messageService.setMessageCallbacks(pushNewMessage, handleErrorMessage);
             var promiseObj=messageService.getAllMessagesForUser($rootScope.userInfo.id);
@@ -21,7 +22,26 @@ webApp.controller("mainMessageController",['$scope', '$rootScope', '$location', 
 
     var pushNewMessage = function (newMessage) {
         var userId = newMessage.receiverId == $rootScope.userInfo.id ? newMessage.senderId : newMessage.receiverId;
-        $rootScope.messageList[userId].messageList.push(newMessage);
+        if (userId in Object.keys($rootScope.messageList)){
+            $rootScope.messageList[userId].messageList.push(newMessage);
+        }
+        else {
+            $rootScope.messageList[userId] = {
+                messageList: [],
+                simpleUser: {}
+            };
+            $rootScope.messageList[userId].messageList.push(newMessage);
+            var promiseObj=userService.getSimpleUser(userId);
+            promiseObj.then(function(value) {
+                    $rootScope.messageList[userId].simpleUser = value;
+                },
+                function (value) {
+                    //can be logging
+                    console.dir(value);
+                }
+            );
+        }
+
     };
 
     var handleErrorMessage = function (newMessage) {
